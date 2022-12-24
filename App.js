@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Image, SectionList } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, SectionList, ScrollView, Dimensions } from 'react-native';
 import { styleProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 
 //Assets
@@ -64,17 +64,9 @@ const Data = [
   // }
 ]
 
-
-
-const List = ({ image }) => {
-    <View styles={styles.itemContainer}>
-      <Image style={styles.itemLogo} source={image} />
-      <Button style={styleProps.timerBtn}>Start</Button>
-    </View>;
-};
-
 export default function App() {
   return (
+    <ScrollView> 
     <View style={styles.mainContainer}>
       <StatusBar style='auto' />
       <View style={styles.logoContainer}>
@@ -82,6 +74,7 @@ export default function App() {
         <Text style={styles.appTitle}>Sunflower Land Timer</Text>
         <Image style={styles.logo} source={Logo} />
       </View>
+      
       <View style={styles.container}>
         <Text style={styles.title}>Timer</Text>
         <SectionList 
@@ -91,7 +84,7 @@ export default function App() {
             <Text style={styles.listHeader}>{title}</Text>
           )}
           renderItem={({ item }) => 
-            <View>
+            <View style={styles.itemContainer}>
               <Image style={styles.itemLogo} source={item} />
               {/* <Button style={styleProps.timerBtn}>Start</Button> */}
             </View>
@@ -99,8 +92,12 @@ export default function App() {
           />
       </View>
     </View>
+    </ScrollView>
   );
 }
+
+const win = Dimensions.get('window')
+const ratio = win.width/36;
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -134,11 +131,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   itemContainer: {
-    backgroundColor: 'red',
+    display: 'flex',
+    backgroundColor: 'blue',
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '80%',
+    width: 50,
+    height: 50,
     borderRadius: 10,
+    marginBottom: 10
   },
+  itemLogo: {
+    width: 36,
+    height: 40
+
+  }
 });
