@@ -1,30 +1,102 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, SectionList } from 'react-native';
 import { styleProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 
 //Assets
 const Logo = require('./assets/icon_large.png');
+const Tools = {
+  axe: require('./assets/tools/axe.png'),
+  woodPickaxe: require('./assets/tools/wood_pickaxe.png'),
+  stonePickaxe: require('./assets/tools/stone_pickaxe.png'),
+  ironPickaxe: require('./assets/tools/iron_pickaxe.png')
+}
 
-const List = ({ title, itemTitle }) => {
-  <View styles={styles.itemContainer}>
-    {/* <Image style={styles.itemLogo} source={require('@expo')} /> */}
-    {/* <Text style={styles.timer}>{timer}</Text> */}
-    <Button style={styleProps.timerBtn}>Start</Button>
-  </View>;
+const Crops = {
+  potato: require('./assets/crops/potato.png'),
+  pumpkin: require('./assets/crops/pumpkin.png'),
+  carrot: require('./assets/crops/carrot.png'),
+  cabbage: require('./assets/crops/cabbage.png'),
+  beetroot: require('./assets/crops/beetroot.png'),
+  cauliflower: require('./assets/crops/cauliflower.png'),
+  parsnip: require('./assets/crops/parsnip.png'),
+  radish: require('./assets/crops/radish.png'),
+  wheat: require('./assets/crops/wheat.png'),
+  kale: require('./assets/crops/kale.png'),
+}
+
+const Food = {
+  mashedPotato: require('./assets/food/mashed_potato.png'),
+  pumpkinSoup: require('./assets/food/pumpkin_soup.png'),
+  bumpkinBroth: require('./assets/food/bumpkin_broth.png'),
+  boiledEgg: require('./assets/food/boiled_eggs.png'),
+  kaleStew: require('./assets/food/kale_stew.png'),
+  mushroomSoup: require('./assets/food/mushroom_soup.png'),
+  reindeerCarrot: require('./assets/food/reindeer_carrot.png'),
+}
+const Data = [
+  {
+    title: "Material",
+    data: [
+      Tools.axe, 
+      Tools.woodPickaxe, 
+      Tools.stonePickaxe, 
+      Tools.ironPickaxe
+    ]
+  },
+  {
+    title: "Crops",
+    data: [
+      Crops.potato,
+      Crops.pumpkin,
+      Crops.carrot,
+      Crops.cabbage,
+      Crops.beetroot,
+      Crops.cauliflower,
+      Crops.parsnip,
+      Crops.radish,
+      Crops.wheat,
+      Crops.kale,
+    ]
+  },
+  // {
+  //   title: "Food",
+  //   data
+  // }
+]
+
+
+
+const List = ({ image }) => {
+    <View styles={styles.itemContainer}>
+      <Image style={styles.itemLogo} source={image} />
+      <Button style={styleProps.timerBtn}>Start</Button>
+    </View>;
 };
 
 export default function App() {
   return (
     <View style={styles.mainContainer}>
+      <StatusBar style='auto' />
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={Logo} />
         <Text style={styles.appTitle}>Sunflower Land Timer</Text>
         <Image style={styles.logo} source={Logo} />
       </View>
       <View style={styles.container}>
-        <Text>Hello Worlds!</Text>
-        <StatusBar style='auto' />
-        {/* <List /> */}
+        <Text style={styles.title}>Timer</Text>
+        <SectionList 
+          sections={Data}
+          keyExtraction={(item, index) => item + index}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.listHeader}>{title}</Text>
+          )}
+          renderItem={({ item }) => 
+            <View>
+              <Image style={styles.itemLogo} source={item} />
+              {/* <Button style={styleProps.timerBtn}>Start</Button> */}
+            </View>
+        }
+          />
       </View>
     </View>
   );
