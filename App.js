@@ -65,6 +65,14 @@ const Data = [
 ]
 
 export default function App() {
+  const renderItem = ({item, index}) => { 
+    return (
+    <View style={styles.itemContainer}>
+      <Image style={styles.itemLogo} source={item} />
+      {/* <Button style={styleProps.timerBtn}>Start</Button> */}
+    </View>
+    )
+  }
   return (
     <ScrollView> 
     <View style={styles.mainContainer}>
@@ -83,12 +91,7 @@ export default function App() {
           renderSectionHeader={({ section: { title } }) => (
             <Text style={styles.listHeader}>{title}</Text>
           )}
-          renderItem={({ item }) => 
-            <View style={styles.itemContainer}>
-              <Image style={styles.itemLogo} source={item} />
-              {/* <Button style={styleProps.timerBtn}>Start</Button> */}
-            </View>
-        }
+          renderItem={renderItem}
           />
       </View>
     </View>
@@ -124,14 +127,12 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: 'red',
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
     width: '90%',
     borderRadius: 10,
   },
   itemContainer: {
-    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     backgroundColor: 'blue',
     alignContent: 'center',
     alignItems: 'center',
@@ -142,8 +143,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   itemLogo: {
-    width: 36,
-    height: 40
+    width: 30,
+    height: 30,
+    resizeMode : 'contain',
 
   }
 });
