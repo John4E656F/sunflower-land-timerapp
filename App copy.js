@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { useState, useEffect } from 'react';
-import Timer from './Timer';
 
 //Assets
 const Logo = require('./assets/icon_large.png');
@@ -121,94 +120,108 @@ export default function App() {
   const [stonepickaxeTimer, setStonePickaxeTimer] = useState({ value: 480000, state: false });
   const [ironpickaxeTimer, setIronPickaxeTimer] = useState({ value: 1440000, state: false });
 
-  // useEffect(() => {
-  //   if (axeTimer.state) {
-  //     const axeTimerValue = axeTimer.value;
-  //     // console.log(axeTimerValue);
-  //     const timer = axeTimer > 0 && setInterval(setAxeTimer({ ...axeTimer, value: axeTimerValue - 1 }), 1000);
-  //     if (axeTimer === 0) {
-  //       setAxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   } else if (woodpickaxeTimer.state) {
-  //     const woodpickaxeTimerValue = woodpickaxeTimer.value;
-  //     // console.log(woodpickaxeTimerValue);
-  //     const timer = woodpickaxeTimer > 0 && setInterval(setWoodPickaxeTimer({ ...woodpickaxeTimer, value: woodpickaxeTimerValue - 1 }), 1000);
-  //     if (woodpickaxeTimer === 0) {
-  //       setWoodPickaxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   } else if (stonepickaxeTimer.state) {
-  //     const value = stonepickaxeTimer.value;
-  //     // console.log(value);
-  //     const timer = stonepickaxeTimer > 0 && setInterval(() => setStonePickaxeTimer({ ...stonepickaxeTimer, value: value - 1 }), 1000);
-  //     if (stonepickaxeTimer === 0) {
-  //       setStonePickaxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   } else if (ironpickaxeTimer.state) {
-  //     const value = ironpickaxeTimer.value;
-  //     console.log(value);
-  //     const timer = stonepickaxeTimer > 0 && setInterval(() => setIronPickaxeTimer({ ...ironpickaxeTimer, value: value - 1 }), 1000);
-  //     if (ironpickaxeTimer === 0) {
-  //       setIronPickaxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   }
-  // }, [
-  //   axeTimer.value,
-  //   axeTimer.state,
-  //   woodpickaxeTimer.value,
-  //   woodpickaxeTimer.state,
-  //   stonepickaxeTimer.value,
-  //   stonepickaxeTimer.state,
-  //   ironpickaxeTimer.value,
-  //   ironpickaxeTimer.state,
-  // ]);
-
-  const startTimer = (state) => {
-    const item = state.formatedItemName;
-    const setState = state.formatedSetItemName;
-    setState({ ...item, state: true });
-  };
-
-  const Timer = ({ state }) => {
-    const item = state.formatedItemName;
-    const setState = state.formatedSetItemName;
-    const itemState = item.state;
-    const itemValue = item.value;
-    useEffect(() => {
-      if (itemState === true) {
-        const timer = itemValue > 0 && setInterval(setState({ ...item, value: itemValue - 1 }), 1000);
-        if (itemValue === 0) {
-          setState({ ...item, state: false });
-        }
+  useEffect(() => {
+    if (axeTimer.state) {
+      const axeTimerValue = axeTimer.value;
+      console.log(axeTimerValue);
+      const timer = axeTimer > 0 && setTimeout(() => setAxeTimer({ ...axeTimer, value: axeTimerValue - 1 }), 1000);
+      if (axeTimer === 0) {
+        setAxeTimer({ state: false });
         return () => clearInterval(timer);
       }
-    });
-    return <Text> {itemValue}</Text>;
+    } else if (woodpickaxeTimer.state) {
+      const woodpickaxeTimerValue = woodpickaxeTimer.value;
+      console.log(woodpickaxeTimerValue);
+      const timer = woodpickaxeTimer > 0 && setInterval(setWoodPickaxeTimer({ ...woodpickaxeTimer, value: woodpickaxeTimerValue - 1 }), 1000);
+      if (woodpickaxeTimer === 0) {
+        setWoodPickaxeTimer({ state: false });
+      }
+      return () => clearInterval(timer);
+    } else if (stonepickaxeTimer.state) {
+      const value = stonepickaxeTimer.value;
+      console.log(value);
+      const timer = stonepickaxeTimer > 0 && setInterval(() => setStonePickaxeTimer({ ...stonepickaxeTimer, value: value - 1 }), 1000);
+      if (stonepickaxeTimer === 0) {
+        setStonePickaxeTimer({ state: false });
+      }
+      return () => clearInterval(timer);
+    } else if (ironpickaxeTimer.state) {
+      const value = ironpickaxeTimer.value;
+      console.log(value);
+      const timer = stonepickaxeTimer > 0 && setInterval(() => setIronPickaxeTimer({ ...ironpickaxeTimer, value: value - 1 }), 1000);
+      if (ironpickaxeTimer === 0) {
+        setIronPickaxeTimer({ state: false });
+      }
+      return () => clearInterval(timer);
+    }
+  }, [
+    axeTimer.state,
+    woodpickaxeTimer.value,
+    woodpickaxeTimer.state,
+    stonepickaxeTimer.value,
+    stonepickaxeTimer.state,
+    ironpickaxeTimer.value,
+    ironpickaxeTimer.state,
+  ]);
+
+  const startTimer = (item) => {
+    console.log(item);
+    switch (item) {
+      case 'Axe':
+        setAxeTimer({ ...axeTimer, state: true });
+        break;
+      case 'Wood Pickaxe':
+        setWoodPickaxeTimer({ ...woodpickaxeTimer, state: true });
+        break;
+      case 'Stone Pickaxe':
+        setStonePickaxeTimer({ ...stonepickaxeTimer, state: true });
+        break;
+      case 'Iron Pickaxe':
+        setIronPickaxeTimer({ ...ironpickaxeTimer, state: true });
+        break;
+      default:
+        null;
+    }
   };
 
-  const ItemList = ({ item }) => {
+  const Timer = (itemName) => {
+    switch (itemName) {
+      case 'Axe':
+        return <Text>{timer.AxeCount}</Text>;
+        break;
+      case 'Wood Pickaxe':
+        return <Text>{timer.WoodPickaxeCount}</Text>;
+        break;
+      case 'Stone Pickaxe':
+        return <Text>{timer.StonePickaxeCount}</Text>;
+        break;
+      case 'Iron Pickaxe':
+        return <Text>{timer.IronPickaxeCount}</Text>;
+        break;
+      default:
+        <Text>{timer}</Text>;
+    }
+  };
+
+  const numColumns = 5;
+  const renderItem = ({ item }) => {
     const itemName = item.name;
     // console.log(itemName);
-    const itemDuration = eval(itemName.replace(/\s+/g, '') + 'Count');
+    // const itemDuration = eval(itemName.replace(/\s+/g, '') + 'Count');
 
-    // const itemDuration = eval(itemName.replace(/\s+/g, '').toLowerCase() + 'Timer');
-    const formatedItemName = eval(itemName.replace(/\s+/g, '').toLowerCase() + 'Timer');
-    const formatedSetItemName = eval('set' + itemName.replace(/\s+/g, '') + 'Timer');
-    // console.log(itemDuration);
+    const itemDuration = eval(itemName.replace(/\s+/g, '').toLowerCase() + 'Timer');
+    const formatedItemName = 'set' + itemName.replace(/\s+/g, '') + 'Timer';
+    // console.log(itemDuration.value);
     // console.log(formatedItemName);
-    // console.log(formatedSetItemName);
     return (
       <View style={styles.itemContainer}>
         <Image style={styles.itemLogo} source={item.image} />
-        {/* <Text>{`${itemDuration}`}</Text> */}
-        <Timer state={{ itemName, formatedItemName, formatedSetItemName }} />
+        <Text>{`${itemDuration.value}`}</Text>
+        <Timer itemName={item} />
         <Button
           style={styles.timerBtn}
           onPress={() => {
-            startTimer({ formatedItemName, formatedSetItemName });
+            startTimer(itemName);
           }}
         >
           Start
@@ -229,19 +242,14 @@ export default function App() {
       <View style={styles.container}>
         <Text style={styles.title}>Timer</Text>
         <Text style={styles.timerCategory}>Tools</Text>
-        <View style={styles.listContainer}>
-          {DataTools.map((item, i) => (
-            <ItemList item={item} key={i} />
-          ))}
-        </View>
-        {/* <FlatList
+        <FlatList
           initialNumToRender='1'
           contentContainerStyle={styles.list}
           numColumns={numColumns}
           data={DataTools}
           keyExtraction={(item, index) => item + index}
           renderItem={renderItem}
-        /> */}
+        />
         {/* <Text style={styles.timerCategory}>Crops</Text>
         <FlatList
           contentContainerStyle={styles.list}
@@ -304,9 +312,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 15,
     marginTop: 20,
-  },
-  listContainer: {
-    flexDirection: 'row',
   },
   itemContainer: {
     backgroundColor: 'blue',
