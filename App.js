@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
-import { useState, useEffect } from 'react';
-import Timer from './Timer';
+import { useState, useEffect, useRef } from 'react';
 
 //Assets
 const Logo = require('./assets/icon_large.png');
@@ -116,55 +115,10 @@ export default function App() {
     ReindeerCarrotCount,
   } = timer;
 
-  const [axeTimer, setAxeTimer] = useState({ value: 120000, state: false });
-  const [woodpickaxeTimer, setWoodPickaxeTimer] = useState({ value: 240000, state: false });
-  const [stonepickaxeTimer, setStonePickaxeTimer] = useState({ value: 480000, state: false });
-  const [ironpickaxeTimer, setIronPickaxeTimer] = useState({ value: 1440000, state: false });
-
-  // useEffect(() => {
-  //   if (axeTimer.state) {
-  //     const axeTimerValue = axeTimer.value;
-  //     // console.log(axeTimerValue);
-  //     const timer = axeTimer > 0 && setInterval(setAxeTimer({ ...axeTimer, value: axeTimerValue - 1 }), 1000);
-  //     if (axeTimer === 0) {
-  //       setAxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   } else if (woodpickaxeTimer.state) {
-  //     const woodpickaxeTimerValue = woodpickaxeTimer.value;
-  //     // console.log(woodpickaxeTimerValue);
-  //     const timer = woodpickaxeTimer > 0 && setInterval(setWoodPickaxeTimer({ ...woodpickaxeTimer, value: woodpickaxeTimerValue - 1 }), 1000);
-  //     if (woodpickaxeTimer === 0) {
-  //       setWoodPickaxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   } else if (stonepickaxeTimer.state) {
-  //     const value = stonepickaxeTimer.value;
-  //     // console.log(value);
-  //     const timer = stonepickaxeTimer > 0 && setInterval(() => setStonePickaxeTimer({ ...stonepickaxeTimer, value: value - 1 }), 1000);
-  //     if (stonepickaxeTimer === 0) {
-  //       setStonePickaxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   } else if (ironpickaxeTimer.state) {
-  //     const value = ironpickaxeTimer.value;
-  //     console.log(value);
-  //     const timer = stonepickaxeTimer > 0 && setInterval(() => setIronPickaxeTimer({ ...ironpickaxeTimer, value: value - 1 }), 1000);
-  //     if (ironpickaxeTimer === 0) {
-  //       setIronPickaxeTimer({ state: false });
-  //     }
-  //     return () => clearInterval(timer);
-  //   }
-  // }, [
-  //   axeTimer.value,
-  //   axeTimer.state,
-  //   woodpickaxeTimer.value,
-  //   woodpickaxeTimer.state,
-  //   stonepickaxeTimer.value,
-  //   stonepickaxeTimer.state,
-  //   ironpickaxeTimer.value,
-  //   ironpickaxeTimer.state,
-  // ]);
+  const [axeTimer, setAxeTimer] = useState({ value: 7200000, state: false });
+  const [woodpickaxeTimer, setWoodPickaxeTimer] = useState({ value: 14400000, state: false });
+  const [stonepickaxeTimer, setStonePickaxeTimer] = useState({ value: 28800000, state: false });
+  const [ironpickaxeTimer, setIronPickaxeTimer] = useState({ value: 86400000, state: false });
 
   const startTimer = (state) => {
     const item = state.formatedItemName;
@@ -172,39 +126,54 @@ export default function App() {
     setState({ ...item, state: true });
   };
 
-  const Timer = ({ state }) => {
-    const item = state.formatedItemName;
-    const setState = state.formatedSetItemName;
+  const formatTime = (duration) => {
+    const d = duration;
+    let days = Math.floor(d / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((d / (1000 * 60 * 60)) % 24);
+    let minutes = Math.floor((d / 1000 / 60) % 60);
+    let seconds = Math.floor((d / 1000) % 60);
+
+    let dDisplay = days > 0 ? days + 'd' : '';
+    let hDisplay = hours > 0 ? hours + 'h' : '';
+    let mDisplay = minutes > 0 ? minutes + 'm' : '';
+    let sDisplay = seconds > 0 ? seconds + 's' : '';
+    return dDisplay + hDisplay + mDisplay + sDisplay;
+  };
+
+  const Timer = ({ props }) => {
+    const ref = useRef(props).current;
+    const item = ref.formatedItemName;
+    const setItem = ref.formatedSetItemName;
     const itemState = item.state;
     const itemValue = item.value;
     useEffect(() => {
       if (itemState === true) {
-        const timer = itemValue > 0 && setInterval(setState({ ...item, value: itemValue - 1 }), 1000);
+        const timer =
+          itemValue > 0 &&
+          setTimeout(
+            setItem((prev) => ({ ...prev, value: itemValue - 5 })),
+            1000,
+          );
         if (itemValue === 0) {
-          setState({ ...item, state: false });
+          setItem((prev) => ({ ...prev, state: false }));
         }
         return () => clearInterval(timer);
       }
-    });
-    return <Text> {itemValue}</Text>;
+    }, [itemValue, itemState]);
+
+    return <Text>{formatTime(itemValue)}</Text>;
   };
 
   const ItemList = ({ item }) => {
     const itemName = item.name;
-    // console.log(itemName);
-    const itemDuration = eval(itemName.replace(/\s+/g, '') + 'Count');
-
-    // const itemDuration = eval(itemName.replace(/\s+/g, '').toLowerCase() + 'Timer');
     const formatedItemName = eval(itemName.replace(/\s+/g, '').toLowerCase() + 'Timer');
     const formatedSetItemName = eval('set' + itemName.replace(/\s+/g, '') + 'Timer');
-    // console.log(itemDuration);
-    // console.log(formatedItemName);
-    // console.log(formatedSetItemName);
+
     return (
       <View style={styles.itemContainer}>
         <Image style={styles.itemLogo} source={item.image} />
-        {/* <Text>{`${itemDuration}`}</Text> */}
-        <Timer state={{ itemName, formatedItemName, formatedSetItemName }} />
+
+        <Timer props={{ itemName, formatedItemName, formatedSetItemName }} />
         <Button
           style={styles.timerBtn}
           onPress={() => {
