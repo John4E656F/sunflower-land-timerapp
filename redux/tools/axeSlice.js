@@ -8,12 +8,12 @@ const initialState = {
 export const axeSlice = createSlice({
   name: 'axe',
   initialState,
-  reducer: {
-    startAxeCounter: (state) => {
-      state.isActive = true;
+  reducers: {
+    startAxeCounter: (state, action) => {
+      state.isActive = action.payload;
     },
   },
 });
 
-export const { startAxeCounter } = createSlice;
+export const { startAxeCounter } = axeSlice.actions;
 export default axeSlice.reducer;

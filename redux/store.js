@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import axeReducer from './axeSlice';
-export const store = configureStore({
+import toolDomain from './tools/index';
+
+const store = configureStore({
   reducer: {
-    axe: axeReducer,
+    toolDomain,
   },
 });
+
+export default store;

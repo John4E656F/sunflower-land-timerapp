@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const formatTime = (duration) => {
-  const isActive = useSelector((state) => state);
   const d = duration;
   let days = Math.floor(d / (1000 * 60 * 60 * 24));
   let hours = Math.floor((d / (1000 * 60 * 60)) % 24);
@@ -15,17 +15,17 @@ const formatTime = (duration) => {
   return dDisplay + hDisplay + mDisplay + sDisplay;
 };
 
-export default function Timer({ props }) {
-  const ref = useRef(props).current;
-  // console.log(ref);
-  const item = ref.formatedItemState;
-  // console.log(item);
-  const setItem = ref.formatedSetItemState;
-  // const itemState = item.state;
-  const itemValue = item.value;
-  const state = ref.startTimer;
+export default function Timer({ itemName }) {
+  const formatedItemState = itemName.replace(/\s+/g, '').toLowerCase();
+  console.log(formatedItemState);
+  const getRoute = (prop) => {
+    return prop.formatedItemState.isActive;
+  };
+
+  // const formatedItemName = 'set' + itemName.replace(/\s+/g, '') + 'Timer';
+  // const formatedSetItemName = eval('set' + itemName.replace(/\s+/g, '') + 'Timer');
+  const state = useSelector(({ toolDomain }) => getRoute(toolDomain));
   // console.log(state);
-  // const [startTimer, setTimer] = useState(state);
   // useEffect(() => {
   //   if (startTimer) {
   //     const timer =
@@ -40,8 +40,7 @@ export default function Timer({ props }) {
   //     return () => clearInterval(timer);
   //   }
   // }, [setTimer]);
-
-  return <Text>{formatTime(itemValue)}</Text>;
+  // return <Text>{formatTime(itemValue)}</Text>;
 }
 
 const styles = StyleSheet.create({});
