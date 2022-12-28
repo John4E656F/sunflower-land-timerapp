@@ -14,7 +14,6 @@ export const axeSlice = createSlice({
     },
     startAxeCounter: (state, action) => {
       state.isActive = action.payload;
-      console.log(state.value);
     },
   },
 });

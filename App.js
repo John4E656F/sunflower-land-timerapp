@@ -7,19 +7,8 @@ import Home from './Home';
 export default function App() {
   return (
     <Provider store={store}>
-      <SafeAreaView style={styles.mainContainer}>
-        <StatusBar style='auto' />
-        <Home />
-      </SafeAreaView>
+      <StatusBar style='auto' />
+      <Home />
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: '#74B1F9',
-    alignItems: 'center',
-    paddingTop: '15%',
-  },
-});

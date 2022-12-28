@@ -61,8 +61,62 @@ const DataFood = [
 ];
 
 export default function Home() {
+  // const [timer, setTimer] = useState({
+  //   //Tools
+  //   AxeCount: 1200000,
+  //   WoodPickaxeCount: 240000,
+  //   StonePickaxeCount: 480000,
+  //   IronPickaxeCount: 1440000,
+
+  //   //Crops
+  //   PotatoCount: 5000,
+  //   PumpkinCount: 30000,
+  //   CarrotCount: 60000,
+  //   CabbageCount: 120000,
+  //   BeetrootCount: 240000,
+  //   CauliflowerCount: 480000,
+  //   ParsnipCount: 720000,
+  //   RadishCount: 1440000,
+  //   WheatCount: 1440000,
+  //   KaleCount: 2160000,
+
+  //   //Food
+  //   PumpkinSoupCount: 3000,
+  //   BumpkinBrothCount: 96000,
+  //   BoiledEggCount: 60000,
+  //   KaleStewCount: 120000,
+  //   MushroomSoupCount: 10000,
+  //   ReindeerCarrotCount: 5000,
+  // });
+  // const {
+  //   AxeCount,
+  //   WoodPickaxeCount,
+  //   StonePickaxeCount,
+  //   IronPickaxeCount,
+
+  //   //Crops
+  //   PotatoCount,
+  //   PumpkinCount,
+  //   CarrotCount,
+  //   CabbageCount,
+  //   BeetrootCount,
+  //   CauliflowerCount,
+  //   ParsnipCount,
+  //   RadishCount,
+  //   WheatCount,
+  //   KaleCount,
+
+  //   //Food
+  //   PumpkinSoupCount,
+  //   BumpkinBrothCount,
+  //   BoiledEggCount,
+  //   KaleStewCount,
+  //   MushroomSoupCount,
+  //   ReindeerCarrotCount,
+  // } = timer;
+
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View>
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={Logo} />
         <Text style={styles.appTitle}>Sunflower Land Timer</Text>
@@ -77,20 +131,8 @@ export default function Home() {
             <ItemList item={item} key={i.toString()} />
           ))}
         </View>
-        <Text style={styles.timerCategory}>Crops</Text>
-        <View style={styles.listContainer}>
-          {DataCrops.map((item, i) => (
-            <ItemList item={item} key={i.toString()} />
-          ))}
-        </View>
-        <Text style={styles.timerCategory}>Foods</Text>
-        <View style={styles.listContainer}>
-          {DataFood.map((item, i) => (
-            <ItemList item={item} key={i.toString()} />
-          ))}
-        </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -121,7 +163,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     backgroundColor: 'red',
-    minWidth: '90%',
+    width: '90%',
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -137,8 +179,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   listContainer: {
-    flexWrap: 'wrap',
-    width: '100%',
     flexDirection: 'row',
   },
 });
