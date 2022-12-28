@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isActive: false,
-  value: 14400000,
+  value: 14400,
 };
 
 export const woodPickaxeSlice = createSlice({

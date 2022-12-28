@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isActive: false,
-  value: 7200000,
+  value: 86400,
 };
 
 export const ironPickaxeSlice = createSlice({

@@ -1,46 +1,76 @@
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-const formatTime = (duration) => {
-  const d = duration;
-  let days = Math.floor(d / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((d / (1000 * 60 * 60)) % 24);
-  let minutes = Math.floor((d / 1000 / 60) % 60);
-  let seconds = Math.floor((d / 1000) % 60);
-  let dDisplay = days > 0 ? days + 'd' : '';
-  let hDisplay = hours > 0 ? hours + 'h' : '';
-  let mDisplay = minutes > 0 ? minutes + 'm' : '';
-  let sDisplay = seconds > 0 ? seconds + 's' : '';
-  return dDisplay + hDisplay + mDisplay + sDisplay;
-};
+import { startAxeCounter } from './redux/tools/axeSlice';
+import { startWoodPickaxeCounter } from './redux/tools/woodPickaxeSlice';
+import { startStonePickaxeCounter } from './redux/tools/stonePickaxeSlice';
+import { startIronPickaxeCounter } from './redux/tools/ironPickaxeSlice';
 
 export default function Timer({ itemName }) {
-  const formatedItemState = itemName.replace(/\s+/g, '').toLowerCase();
-  console.log(formatedItemState);
-  const getRoute = (prop) => {
-    return prop.formatedItemState.isActive;
-  };
+  let initialStatus;
+  switch (itemName) {
+    case 'Axe':
+      initialStatus = useSelector(({ toolDomain }) => toolDomain.axe);
+      break;
+    case 'Wood Pickaxe':
+      initialStatus = useSelector(({ toolDomain }) => toolDomain.woodPickaxe);
+      break;
+    case 'Stone Pickaxe':
+      initialStatus = useSelector(({ toolDomain }) => toolDomain.stonePickaxe);
+      break;
+    case 'Iron Pickaxe':
+      initialStatus = useSelector(({ toolDomain }) => toolDomain.ironPickaxe);
+      break;
+  }
 
-  // const formatedItemName = 'set' + itemName.replace(/\s+/g, '') + 'Timer';
-  // const formatedSetItemName = eval('set' + itemName.replace(/\s+/g, '') + 'Timer');
-  const state = useSelector(({ toolDomain }) => getRoute(toolDomain));
-  // console.log(state);
-  // useEffect(() => {
-  //   if (startTimer) {
-  //     const timer =
-  //       itemValue > 0 &&
-  //       setTimeout(
-  //         setItem((prev) => ({ ...prev, value: itemValue - 5 })),
-  //         1000,
-  //       );
-  //     if (itemValue === 0) {
-  //       setTimer(false);
-  //     }
-  //     return () => clearInterval(timer);
-  //   }
-  // }, [setTimer]);
-  // return <Text>{formatTime(itemValue)}</Text>;
+  let initialValue = initialStatus.value;
+  let isActive = initialStatus.isActive;
+  const [value, setvalue] = useState(initialValue);
+
+  let sDisplay = value % 60;
+  const minutesRemaining = parseInt((value - sDisplay) / 60);
+  let mDisplay = minutesRemaining % 60;
+  const hoursRemaining = (minutesRemaining - mDisplay) / 60;
+  let hDisplay = hoursRemaining % 60;
+  const daysRemaining = (hoursRemaining - hDisplay) / 60;
+  let dDisplay = daysRemaining % 60;
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive === true) {
+      if (value > 0) {
+        interval = setInterval(() => {
+          setvalue(value - 1);
+        }, 1000);
+      } else if (!isActive && value === 0) {
+        clearInterval(interval);
+        switch (itemName) {
+          case 'Axe':
+            dispatch(startAxeCounter(false));
+            break;
+          case 'Wood Pickaxe':
+            dispatch(startWoodPickaxeCounter(false));
+            break;
+          case 'Stone Pickaxe':
+            dispatch(startStonePickaxeCounter(false));
+            break;
+          case 'Iron Pickaxe':
+            dispatch(startIronPickaxeCounter(false));
+            break;
+        }
+      }
+      return () => clearInterval(interval);
+    }
+  }, [isActive, value]);
+
+  return (
+    <Text>
+      {dDisplay > 0 ? dDisplay + 'd ' : ''}
+      {hDisplay > 0 ? hDisplay + 'h ' : ''}
+      {mDisplay > 0 ? mDisplay + 'm ' : ''}
+      {sDisplay > 0 ? sDisplay + 's ' : ''}
+    </Text>
+  );
 }
 
 const styles = StyleSheet.create({});

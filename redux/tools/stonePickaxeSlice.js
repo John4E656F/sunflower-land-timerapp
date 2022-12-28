@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isActive: false,
-  value: 28800000,
+  value: 28800,
 };
 
 export const stonePickaxeSlice = createSlice({

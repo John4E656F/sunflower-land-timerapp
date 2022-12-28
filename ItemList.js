@@ -3,33 +3,39 @@ import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaVi
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { startAxeCounter } from './redux/tools/axeSlice';
+import { startWoodPickaxeCounter } from './redux/tools/woodPickaxeSlice';
+import { startStonePickaxeCounter } from './redux/tools/stonePickaxeSlice';
+import { startIronPickaxeCounter } from './redux/tools/ironPickaxeSlice';
+
 import Timer from './Timer';
 
 export default function ItemList({ item }) {
   const dispatch = useDispatch();
-  const [axeTimer, setAxeTimer] = useState({ value: 7200000, state: false });
-  const [woodpickaxeTimer, setWoodPickaxeTimer] = useState({ value: 14400000, state: false });
-  const [stonepickaxeTimer, setStonePickaxeTimer] = useState({ value: 28800000, state: false });
-  const [ironpickaxeTimer, setIronPickaxeTimer] = useState({ value: 86400000, state: false });
-
+  // const x = useSelector(({ toolDomain }) => toolDomain.axe.isActive);
+  let axe = useSelector(({ toolDomain }) => toolDomain.axe);
+  let woodPickaxe = useSelector(({ toolDomain }) => toolDomain.woodPickaxe.isActive);
+  let stonePickaxe = useSelector(({ toolDomain }) => toolDomain.stonePickaxe.isActive);
+  let ironPickaxe = useSelector(({ toolDomain }) => toolDomain.ironPickaxe.isActive);
+  // console.log(x);
   const itemName = item.name;
   // const formatedItemState = eval(itemName.replace(/\s+/g, '').toLowerCase() + 'Timer');
   // const formatedItemName = 'set' + itemName.replace(/\s+/g, '') + 'Timer';
   // const formatedSetItemName = eval('set' + itemName.replace(/\s+/g, '') + 'Timer');
-  console.log(itemName);
+  // console.log(itemName);
+
   function startTimer() {
     switch (itemName) {
       case 'Axe':
-        () => dispatch(startAxeCounter());
+        dispatch(startAxeCounter(true));
         break;
       case 'Wood Pickaxe':
-        () => dispatch(startAxeCounter());
+        dispatch(startWoodPickaxeCounter(true));
         break;
       case 'Stone Pickaxe':
-        () => dispatch(startAxeCounter());
+        dispatch(startStonePickaxeCounter(true));
         break;
       case 'Iron Pickaxe':
-        () => dispatch(startAxeCounter());
+        dispatch(startIronPickaxeCounter(true));
         break;
     }
   }
