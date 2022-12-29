@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import List from './List';
+import List from './src/List';
 
 //Assets
 const Logo = require('./assets/icon_large.png');

@@ -7,24 +7,24 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon_large.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon_large.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.john4e656f.sunflowerlandtimerapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,6 +34,7 @@
         "projectId": "cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
       }
     },
+    "plugins": ["@notifee/react-native"],
     "owner": "john4e656f"
   }
 }
