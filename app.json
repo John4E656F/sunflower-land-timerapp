@@ -4,7 +4,7 @@
     "slug": "sunflower-land-timer-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon_large.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/icon_large.png",
@@ -12,11 +12,15 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -24,10 +28,8 @@
         "foregroundImage": "./assets/icon_large.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.john4e656f.sunflowerlandtimerapp"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "package": "com.john4e656f.sunflowerlandtimerapp",
+      "runtimeVersion": "1.0.0"
     },
     "extra": {
       "eas": {
