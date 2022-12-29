@@ -35,4 +35,9 @@ To increase the efficiency of my farm. A timer that will notify when you can har
 
 [Expo](https://expo.dev/)
 
+ <h1>🚧Bug with redux core🚧</h1>
+ When rtk is implemented the app crash on mobile!
+
+[<h2>Source:</h2> https://github.com/reduxjs/redux/issues/4443 ](https://github.com/reduxjs/redux/issues/4443)
+
 </div>
