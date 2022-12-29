@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import ItemList from './ItemList';
+import List from './List';
+
 //Assets
 const Logo = require('./assets/icon_large.png');
 const Tools = {
@@ -62,7 +63,7 @@ const DataFood = [
 
 export default function Home() {
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View>
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={Logo} />
         <Text style={styles.appTitle}>Sunflower Land Timer</Text>
@@ -74,37 +75,32 @@ export default function Home() {
         <Text style={styles.timerCategory}>Tools</Text>
         <View style={styles.listContainer}>
           {DataTools.map((item, i) => (
-            <ItemList item={item} key={i.toString()} />
+            <List item={item} key={item + i} />
           ))}
         </View>
         <Text style={styles.timerCategory}>Crops</Text>
         <View style={styles.listContainer}>
           {DataCrops.map((item, i) => (
-            <ItemList item={item} key={i.toString()} />
+            <List item={item} key={item + i} />
           ))}
         </View>
         <Text style={styles.timerCategory}>Foods</Text>
         <View style={styles.listContainer}>
           {DataFood.map((item, i) => (
-            <ItemList item={item} key={i.toString()} />
+            <List item={item} key={item + i} />
           ))}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: '#74B1F9',
-    alignItems: 'center',
-    paddingTop: '15%',
-  },
   logoContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
     marginBottom: 20,
   },
   logo: {
@@ -118,7 +114,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   container: {
-    paddingTop: 10,
+    paddingTop: 15,
     paddingBottom: 10,
     backgroundColor: 'red',
     minWidth: '90%',
@@ -138,6 +134,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flexWrap: 'wrap',
+    justifyContent: 'center',
     width: '100%',
     flexDirection: 'row',
   },
