@@ -62,7 +62,7 @@ const DataFood = [
 
 export default function Home() {
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View>
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={Logo} />
         <Text style={styles.appTitle}>Sunflower Land Timer</Text>
@@ -90,17 +90,11 @@ export default function Home() {
           ))}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: '#74B1F9',
-    alignItems: 'center',
-    paddingTop: '15%',
-  },
   logoContainer: {
     flexDirection: 'row',
     justifyContent: 'center',

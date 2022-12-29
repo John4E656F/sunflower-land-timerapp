@@ -101,7 +101,7 @@ export default function ItemList({ item }) {
     <View style={styles.itemContainer}>
       <Image style={styles.itemLogo} source={item.image} />
       <Timer itemName={itemName} key={itemName} />
-      <Button title='Start' onPress={() => startTimer()} />
+      {/* <Button title='Start' onPress={() => startTimer()} /> */}
     </View>
   );
 }

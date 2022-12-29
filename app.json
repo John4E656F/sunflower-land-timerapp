@@ -6,17 +6,17 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "jsEngine": "hermes",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -34,6 +34,9 @@
         "projectId": "cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
       }
     },
-    "owner": "john4e656f"
+    "owner": "john4e656f",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }
