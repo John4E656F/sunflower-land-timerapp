@@ -8,8 +8,6 @@
       "developmentClient": true,
       "distribution": "internal",
       "android": {
-        "version": "v1",
-        "android.versionCode": "v1",
         "image": "ubuntu-18.04-jdk-11-ndk-r19c"
       },
       "channel": "development"
