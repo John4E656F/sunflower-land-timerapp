@@ -41,7 +41,7 @@ export default function Timer({ itemName, isActive, endTimer }) {
   }, [isActive, value]);
 
   return (
-    <Text>
+    <Text style={[styles.timerText, isActive ? styles.timerActive : styles.timerInActive]}>
       {dDisplay > 0 ? dDisplay + 'd ' : ''}
       {hDisplay > 0 ? hDisplay + 'h ' : ''}
       {mDisplay > 0 ? mDisplay + 'm ' : ''}
@@ -50,4 +50,15 @@ export default function Timer({ itemName, isActive, endTimer }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  timerText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  timerActive: {
+    color: 'black',
+  },
+  timerInActive: {
+    color: 'white',
+  },
+});

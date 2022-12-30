@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
 import Timer from './Timer';
 
@@ -14,20 +14,24 @@ export default function ItemList({ item }) {
   };
 
   return (
-    <View style={[styles.itemContainer, isActive ? styles.active : styles.notActive]}>
-      <Image style={styles.itemLogo} source={item.image} />
-      <Timer itemName={itemName} isActive={isActive} endTimer={() => endTimer()} key={itemName} />
-      {isActive ? null : <Button title='Start' onPress={() => startTimer()} />}
-    </View>
+    <TouchableOpacity stle={styles.startBtn} onPress={() => startTimer()}>
+      <View style={[styles.itemContainer, isActive ? styles.active : styles.notActive]}>
+        <Image style={styles.itemLogo} source={item.image} />
+        <View style={styles.textContainer}>
+          <Timer itemName={itemName} isActive={isActive} endTimer={() => endTimer()} key={itemName} />
+        </View>
+        {isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   active: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#EFBA3D',
   },
   notActive: {
-    backgroundColor: 'blue',
+    backgroundColor: '#5AC142',
   },
   itemContainer: {
     alignContent: 'center',
@@ -43,8 +47,16 @@ const styles = StyleSheet.create({
   },
   itemLogo: {
     padding: 5,
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
     resizeMode: 'contain',
+    marginBottom: 5,
+  },
+  textContainer: {
+    marginBottom: 5,
+  },
+  startBtn: {
+    backgroundColor: '#004AAD',
+    borderRadius: 50,
   },
 });

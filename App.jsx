@@ -8,7 +8,7 @@ import Home from './Home';
 export default function App() {
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar style='auto' />
         <Home />
       </ScrollView>
@@ -19,7 +19,7 @@ export default function App() {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#74B1F9',
+    backgroundColor: '#E1E8EE',
     alignItems: 'center',
   },
   centeredView: {
