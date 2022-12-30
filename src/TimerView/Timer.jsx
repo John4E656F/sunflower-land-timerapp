@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import onDisplayNotification from '../Utils/Notification';
-import checkItem from '../Utils/CheckItem';
+import onDisplayNotification from '../../Utils/Notification';
+import checkItem from '../../Utils/CheckItem';
 
 export default function Timer({ itemName, isActive, endTimer }) {
   const [countdownState, setCountdownState] = useState(false);

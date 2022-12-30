@@ -1,37 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import List from './src/List';
+import List from './List';
 
 //Assets
-const Logo = require('./assets/icon_large.png');
+const Logo = require('../../assets/icon_large.png');
 const Tools = {
-  axe: require('./assets/tools/axe.png'),
-  woodPickaxe: require('./assets/tools/wood_pickaxe.png'),
-  stonePickaxe: require('./assets/tools/stone_pickaxe.png'),
-  ironPickaxe: require('./assets/tools/iron_pickaxe.png'),
+  axe: require('../../assets/tools/axe.png'),
+  woodPickaxe: require('../../assets/tools/wood_pickaxe.png'),
+  stonePickaxe: require('../../assets/tools/stone_pickaxe.png'),
+  ironPickaxe: require('../../assets/tools/iron_pickaxe.png'),
 };
 
 const Crops = {
-  potato: require('./assets/crops/potato.png'),
-  pumpkin: require('./assets/crops/pumpkin.png'),
-  carrot: require('./assets/crops/carrot.png'),
-  cabbage: require('./assets/crops/cabbage.png'),
-  beetroot: require('./assets/crops/beetroot.png'),
-  cauliflower: require('./assets/crops/cauliflower.png'),
-  parsnip: require('./assets/crops/parsnip.png'),
-  radish: require('./assets/crops/radish.png'),
-  wheat: require('./assets/crops/wheat.png'),
-  kale: require('./assets/crops/kale.png'),
+  potato: require('../../assets/crops/potato.png'),
+  pumpkin: require('../../assets/crops/pumpkin.png'),
+  carrot: require('../../assets/crops/carrot.png'),
+  cabbage: require('../../assets/crops/cabbage.png'),
+  beetroot: require('../../assets/crops/beetroot.png'),
+  cauliflower: require('../../assets/crops/cauliflower.png'),
+  parsnip: require('../../assets/crops/parsnip.png'),
+  radish: require('../../assets/crops/radish.png'),
+  wheat: require('../../assets/crops/wheat.png'),
+  kale: require('../../assets/crops/kale.png'),
 };
 
 const Food = {
-  pumpkinSoup: require('./assets/food/pumpkin_soup.png'),
-  bumpkinBroth: require('./assets/food/bumpkin_broth.png'),
-  boiledEgg: require('./assets/food/boiled_eggs.png'),
-  kaleStew: require('./assets/food/kale_stew.png'),
-  mushroomSoup: require('./assets/food/mushroom_soup.png'),
-  reindeerCarrot: require('./assets/food/reindeer_carrot.png'),
+  pumpkinSoup: require('../../assets/food/pumpkin_soup.png'),
+  bumpkinBroth: require('../../assets/food/bumpkin_broth.png'),
+  boiledEgg: require('../../assets/food/boiled_eggs.png'),
+  kaleStew: require('../../assets/food/kale_stew.png'),
+  mushroomSoup: require('../../assets/food/mushroom_soup.png'),
+  reindeerCarrot: require('../../assets/food/reindeer_carrot.png'),
 };
 
 const DataTools = [
@@ -61,7 +61,7 @@ const DataFood = [
   { name: 'Reindeer Carrot', image: Food.reindeerCarrot },
 ];
 
-export default function Home() {
+export default function TimerView() {
   return (
     <View>
       <View style={styles.logoContainer}>

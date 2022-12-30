@@ -1,18 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import notifee from '@notifee/react-native';
 import { StyleSheet, Modal, Text, View, Pressable, ScrollView, SafeAreaView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { useState, useEffect, useRef } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Home from './Home';
+import TimerView from './src/TimerView/index';
+import BoostView from './src/BoostView/index';
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <StatusBar style='auto' />
-        <Home />
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.mainContainer}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <StatusBar style='auto' />
+          <Stack.Navigator initialRouteName='Timer'>
+            <Stack.Screen name='Timer' component={TimerView} options={{ title: 'Timer View' }} />
+          </Stack.Navigator>
+        </ScrollView>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
