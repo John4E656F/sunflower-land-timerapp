@@ -1,25 +1,58 @@
 import { StatusBar } from 'expo-status-bar';
 import notifee from '@notifee/react-native';
 import { StyleSheet, Modal, Text, View, Pressable, ScrollView, SafeAreaView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { useState, useEffect, useRef } from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import TimerView from './src/TimerView/index';
-import BoostView from './src/BoostView/index';
-const Stack = createNativeStackNavigator();
+import BoostView from './src/Boost View/index';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <SafeAreaView style={styles.mainContainer}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <StatusBar style='auto' />
-          <Stack.Navigator initialRouteName='Timer'>
-            <Stack.Screen name='Timer' component={TimerView} options={{ title: 'Timer View' }} />
-          </Stack.Navigator>
-        </ScrollView>
-      </SafeAreaView>
+    <NavigationContainer theme={DarkTheme}>
+      <StatusBar style='auto' />
+      <Tab.Navigator
+        initialRouteName='Timer'
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === 'Timer') {
+              iconName = focused ? 'timer-outline' : 'timer';
+            } else if (route.name === 'Boost') {
+              iconName = focused ? 'construct-outline' : 'construct';
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: '#95C8F4',
+          tabBarInactiveTintColor: 'red',
+        })}
+      >
+        <Tab.Screen
+          name='Timer'
+          options={{
+            title: 'Timer',
+            headerStyle: {
+              backgroundColor: '#95C8F4',
+            },
+          }}
+        >
+          {(props) => <TimerView {...props} />}
+        </Tab.Screen>
+        <Tab.Screen
+          name='Boost'
+          component={BoostView}
+          options={{
+            title: 'Boost',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

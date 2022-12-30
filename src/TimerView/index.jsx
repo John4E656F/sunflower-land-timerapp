@@ -63,39 +63,48 @@ const DataFood = [
 
 export default function TimerView() {
   return (
-    <View>
-      <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={Logo} />
-        <Text style={styles.appTitle}>Sunflower Land Timer</Text>
-        <Image style={styles.logo} source={Logo} />
-      </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          <View style={styles.logoContainer}>
+            <Image style={styles.logo} source={Logo} />
+            <Text style={styles.appTitle}>Sunflower Land Timer</Text>
+            <Image style={styles.logo} source={Logo} />
+          </View>
 
-      <View style={styles.container}>
-        <Text style={styles.title}>Timer</Text>
-        <Text style={styles.timerCategory}>Tools</Text>
-        <View style={styles.listContainer}>
-          {DataTools.map((item, i) => (
-            <List item={item} key={item + i} />
-          ))}
+          <View style={styles.container}>
+            <Text style={styles.title}>Timer</Text>
+            <Text style={styles.timerCategory}>Tools</Text>
+            <View style={styles.listContainer}>
+              {DataTools.map((item, i) => (
+                <List item={item} key={item + i} />
+              ))}
+            </View>
+            <Text style={styles.timerCategory}>Crops</Text>
+            <View style={styles.listContainer}>
+              {DataCrops.map((item, i) => (
+                <List item={item} key={item + i} />
+              ))}
+            </View>
+            <Text style={styles.timerCategory}>Foods</Text>
+            <View style={styles.listContainer}>
+              {DataFood.map((item, i) => (
+                <List item={item} key={item + i} />
+              ))}
+            </View>
+          </View>
         </View>
-        <Text style={styles.timerCategory}>Crops</Text>
-        <View style={styles.listContainer}>
-          {DataCrops.map((item, i) => (
-            <List item={item} key={item + i} />
-          ))}
-        </View>
-        <Text style={styles.timerCategory}>Foods</Text>
-        <View style={styles.listContainer}>
-          {DataFood.map((item, i) => (
-            <List item={item} key={item + i} />
-          ))}
-        </View>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#E1E8EE',
+    alignItems: 'center',
+  },
   logoContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
