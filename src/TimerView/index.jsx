@@ -1,10 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
-import { useState, useEffect, useRef } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import List from './List';
-import { Logo, DataTools, DataCrops, DataFood } from '../../Utils/Assets';
+import { Logo } from '../../Utils/Assets';
+import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../Utils/Context';
 
 export default function TimerView() {
+  const DataTools = useContext(DataToolsContext);
+  const DataCrops = useContext(DataCropsContext);
+  const DataFood = useContext(DataFoodContext);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
