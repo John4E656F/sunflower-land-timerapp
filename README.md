@@ -35,4 +35,12 @@ To increase the efficiency of my farm. A timer that will notify when you can har
 
 [Expo](https://expo.dev/)
 
+# To Do
+
+[] Work on dessign
+
+[] Add Assets & Icon
+
+[] ... More Features
+
 </div>

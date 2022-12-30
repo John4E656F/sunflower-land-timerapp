@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import List from './List';
+import List from './src/List';
 
 //Assets
 const Logo = require('./assets/icon_large.png');
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 15,
     paddingBottom: 10,
-    backgroundColor: 'red',
+    backgroundColor: '#1287FE',
     minWidth: '90%',
     borderRadius: 15,
     justifyContent: 'center',
@@ -124,13 +124,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'Roboto',
-    fontWeight: '600',
-    fontSize: 18,
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: '#5AC142',
   },
   timerCategory: {
-    fontWeight: '500',
-    fontSize: 15,
+    fontWeight: '400',
+    fontSize: 20,
     marginTop: 20,
+    marginBottom: 10,
+    color: '#214918',
   },
   listContainer: {
     flexWrap: 'wrap',
