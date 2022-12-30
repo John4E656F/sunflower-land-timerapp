@@ -6,6 +6,8 @@ export default async function onDisplayNotification(notif) {
   const channelId = await notifee.createChannel({
     id: 'SFLTIMER',
     name: 'SFLTIMER Channel',
+    vibration: true,
+    vibrationPattern: [300, 500],
   });
 
   // Display a notification
@@ -13,6 +15,7 @@ export default async function onDisplayNotification(notif) {
     title: notif.Title,
     body: notif.body,
     android: {
+      vibrationPattern: [300, 500],
       channelId,
       // smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
       // pressAction is needed if you want the notification to open the app when pressed

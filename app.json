@@ -29,7 +29,9 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.john4e656f.sunflowerlandtimerapp",
-      "runtimeVersion": "47.0.0"
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
     },
     "extra": {
       "eas": {
