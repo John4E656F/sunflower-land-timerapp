@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SunflowerLand-TimerApp",
-    "slug": "sunflower-land-timer-app",
+    "name": "SunflowerLand-Timer",
+    "slug": "sunflower-land-timer",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,7 +13,7 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
+      "url": "https://u.expo.dev/dc8b3b56-79dc-44db-9162-0e2ee45886f2"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -35,7 +35,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
+        "projectId": "dc8b3b56-79dc-44db-9162-0e2ee45886f2"
       }
     },
     "plugins": ["@notifee/react-native"],

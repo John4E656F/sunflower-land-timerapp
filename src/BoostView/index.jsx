@@ -1,18 +1,18 @@
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
-// import { useContext, useState, useEffect, useRef } from 'react';
-// import List from './List';
-// import { Logo } from '../../Utils/Assets';
-// import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../Utils/Context';
+import { useContext, useState, useEffect, useRef } from 'react';
+import List from './List';
+import { Logo } from '../../Utils/Assets';
+import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../Utils/Context';
 
 export default function TimerView() {
-  // const DataTools = useContext(DataToolsContext);
-  // const DataCrops = useContext(DataCropsContext);
-  // const DataFood = useContext(DataFoodContext);
+  const DataTools = useContext(DataToolsContext);
+  const DataCrops = useContext(DataCropsContext);
+  const DataFood = useContext(DataFoodContext);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View>
+        <View>
           <View style={styles.logoContainer}>
             <Image style={styles.logo} source={Logo} />
             <Text style={styles.appTitle}>Sunflower Land Timer</Text>
@@ -40,7 +40,7 @@ export default function TimerView() {
               ))}
             </View>
           </View>
-        </View> */}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
