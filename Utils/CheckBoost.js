@@ -2,62 +2,142 @@ export default function checkBoost(itemName, setBoostState) {
   switch (itemName) {
     case 'treeHugger':
       setBoostState((prev) => ({
-        ...prev.treeHugger,
-        treeHugger: true,
+        treeHugger: !prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'apprenticeBeaver':
       setBoostState((prev) => ({
-        ...prev.apprenticeBeaver,
-        apprenticeBeaver: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.constructionBeaver === true ? false : !prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'constructionBeaver':
       setBoostState((prev) => ({
-        ...prev.constructionBeaver,
-        constructionBeaver: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver === true ? false : false,
+        constructionBeaver: !prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'coalFace':
       setBoostState((prev) => ({
-        ...prev.coalFace,
-        coalFace: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: !prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'seedSpecialist':
       setBoostState((prev) => ({
-        ...prev.seedSpecialist,
-        seedSpecialist: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: !prev.seedSpecialist,
+        nancy: prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'nancy':
       setBoostState((prev) => ({
-        ...prev.nancy,
-        nancy: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.scarecrow || prev.kuebiko === true ? false : !prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'scarecrow':
       setBoostState((prev) => ({
-        ...prev.scarecrow,
-        scarecrow: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy === true ? false : false,
+        scarecrow: prev.kuebiko === true ? false : !prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'kuebiko':
       setBoostState((prev) => ({
-        ...prev.kuebiko,
-        kuebiko: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy === true ? false : false,
+        scarecrow: prev.scarecrow === true ? false : false,
+        kuebiko: !prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'mysteriousParsnip':
       setBoostState((prev) => ({
-        ...prev.mysteriousParsnip,
-        mysteriousParsnip: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: !prev.mysteriousParsnip,
+        rushHour: prev.rushHour,
       }));
       break;
     case 'rushHour':
       setBoostState((prev) => ({
-        ...prev.rushHour,
-        rushHour: true,
+        treeHugger: prev.treeHugger,
+        apprenticeBeaver: prev.apprenticeBeaver,
+        constructionBeaver: prev.constructionBeaver,
+        coalFace: prev.coalFace,
+        seedSpecialist: prev.seedSpecialist,
+        nancy: prev.nancy,
+        scarecrow: prev.scarecrow,
+        kuebiko: prev.kuebiko,
+        mysteriousParsnip: prev.mysteriousParsnip,
+        rushHour: !prev.rushHour,
       }));
       break;
   }

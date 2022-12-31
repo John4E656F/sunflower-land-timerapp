@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import notifee from '@notifee/react-native';
 import { StyleSheet, Modal, Text, View, Pressable, ScrollView, SafeAreaView } from 'react-native';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TimerView from './src/TimerView/index';
 import BoostView from './src/BoostView/index';
 import { storeObjectData } from './Utils/Storage';
+import { getObjectData } from './Utils/Storage';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,8 +25,20 @@ export default function App() {
     rushHour: false,
   });
 
-  useEffect(() => {}, [boostState]);
+  const [newBoostState, setNewBoostState] = useState();
 
+  useEffect(() => {
+    setNewBoostState(boostState);
+  }, []);
+
+  useEffect(() => {
+    storeObjectData(boostState);
+    (async () => {
+      await getObjectData(setNewBoostState);
+    })();
+  }, [boostState]);
+
+  // console.log(newBoostState);
   return (
     <NavigationContainer theme={DarkTheme}>
       <StatusBar style='auto' />
@@ -56,7 +68,7 @@ export default function App() {
             },
           }}
         >
-          {(props) => <TimerView {...props} />}
+          {(props) => <TimerView boostState={newBoostState} />}
         </Tab.Screen>
         <Tab.Screen
           name='Boost'
@@ -67,7 +79,7 @@ export default function App() {
             },
           }}
         >
-          {() => <BoostView setBoostState={setBoostState} />}
+          {() => <BoostView setBoostState={setBoostState} boostState={boostState} />}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>

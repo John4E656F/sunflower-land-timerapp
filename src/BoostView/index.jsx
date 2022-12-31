@@ -4,7 +4,7 @@ import BoostListItem from './BoostListItem';
 import { Logo } from '../../Utils/Assets';
 import { DataBoostContext } from '../../Utils/Context';
 
-export default function TimerView({ setBoostState }) {
+export default function TimerView({ boostState, setBoostState }) {
   const DataBoosts = useContext(DataBoostContext);
 
   return (
@@ -22,7 +22,7 @@ export default function TimerView({ setBoostState }) {
             <Text style={styles.timerCategory}>Tools</Text>
             <View style={styles.listContainer}>
               {DataBoosts.map((item, i) => (
-                <BoostListItem item={item} key={item + i} setBoostState={setBoostState} />
+                <BoostListItem item={item} key={item + i} boostState={boostState} setBoostState={setBoostState} />
               ))}
             </View>
           </View>

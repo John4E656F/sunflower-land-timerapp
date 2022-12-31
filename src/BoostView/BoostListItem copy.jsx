@@ -9,9 +9,24 @@ export default function ItemList({ item, boostState, setBoostState }) {
 
   const toggleSwitch = () => {
     CheckBoost(itemName, setBoostState);
-    setIsActive((previousState) => !previousState);
+    switch (itemName) {
+      case 'apprenticeBeaver':
+        return setIsActive(boostState.constructionBeaver === true ? false : boostState.apprenticeBeaver);
+        break;
+      case 'nancy':
+        return setIsActive(boostState.kuebiko || boostState.scarecrow === true ? false : boostState.nancy);
+        break;
+      case 'scarecrow':
+        return setIsActive(boostState.kuebiko === true ? false : boostState.scarecrow);
+        break;
+      default:
+        setIsActive((previousState) => !previousState);
+        break;
+    }
   };
-
+  if (itemName === 'apprenticeBeaver' || itemName === 'nancy' || 'scarecrow') {
+    useEffect(() => {});
+  }
   return (
     <TouchableOpacity stle={styles.startBtn} onPress={() => toggleSwitch()}>
       <View style={[styles.itemContainer, isActive ? styles.active : styles.notActive]}>

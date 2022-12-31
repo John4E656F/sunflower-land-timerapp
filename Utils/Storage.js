@@ -11,7 +11,7 @@ export const storeStringData = async (itemName, value) => {
 export const storeObjectData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem('@storage_Key', jsonValue);
+    await AsyncStorage.setItem('@boost', jsonValue);
   } catch (e) {
     console.log(e);
   }
@@ -28,11 +28,13 @@ export const getStringData = async (itemName) => {
   }
 };
 
-export const getObjectData = async () => {
+export const getObjectData = async (setNewBoostState) => {
   try {
     const jsonValue = await AsyncStorage.getItem('@boost');
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+    setNewBoostState(JSON.parse(jsonValue));
+    return JSON.parse(jsonValue);
   } catch (e) {
     // error reading value
   }
 };
+// export const updateData
