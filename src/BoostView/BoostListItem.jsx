@@ -1,23 +1,28 @@
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Switch, Image, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
+import CheckBoost from '../../Utils/CheckBoost';
 
-export default function ItemList({ item }) {
+export default function ItemList({ item, setBoostState }) {
   const [isActive, setIsActive] = useState(false);
   const itemName = item.name;
 
-  const startTimer = () => {
-    setIsActive(true);
-  };
-  const endTimer = () => {
-    setIsActive(false);
+  const toggleSwitch = () => {
+    CheckBoost(itemName, setBoostState);
+    setIsActive((previousState) => !previousState);
   };
 
   return (
-    <TouchableOpacity stle={styles.startBtn} onPress={() => startTimer()}>
+    <TouchableOpacity stle={styles.startBtn} onPress={() => toggleSwitch()}>
       <View style={[styles.itemContainer, isActive ? styles.active : styles.notActive]}>
         <Image style={styles.itemLogo} source={item.image} />
         <View style={styles.textContainer}></View>
-        {isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
+        <Switch
+          trackColor={{ false: '#767577', true: '#81b0ff' }}
+          thumbColor={isActive ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor='#3e3e3e'
+          onValueChange={toggleSwitch}
+          value={isActive}
+        />
       </View>
     </TouchableOpacity>
   );

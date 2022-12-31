@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TimerView from './src/TimerView/index';
 import BoostView from './src/BoostView/index';
+import { storeObjectData } from './Utils/Storage';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,12 +25,7 @@ export default function App() {
     rushHour: false,
   });
 
-  const updateBoost = (boost) => {
-    setBoostState((prev) => ({
-      ...prev.boost,
-      boost: true,
-    }));
-  };
+  useEffect(() => {}, [boostState]);
 
   return (
     <NavigationContainer theme={DarkTheme}>
@@ -64,7 +60,6 @@ export default function App() {
         </Tab.Screen>
         <Tab.Screen
           name='Boost'
-          component={BoostView}
           options={{
             title: 'Boost',
             headerStyle: {
@@ -72,7 +67,7 @@ export default function App() {
             },
           }}
         >
-          {() => <TimerView updateBoost={() => updateBoost(boost)} />}
+          {() => <BoostView setBoostState={setBoostState} />}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>

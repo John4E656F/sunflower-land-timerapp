@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 import onDisplayNotification from '../../Utils/Notification';
 import checkItem from '../../Utils/CheckItem';
+import { getObjectData } from '../../Utils/Storage';
 
 export default function Timer({ itemName, isActive, endTimer }) {
   const [countdownState, setCountdownState] = useState(false);
@@ -22,6 +23,8 @@ export default function Timer({ itemName, isActive, endTimer }) {
   let dDisplay = daysRemaining % 60;
 
   useEffect(() => {
+    const data = getObjectData(`@boost`);
+    console.log(data);
     let interval = null;
     if (isActive === true) {
       if (value > 0) {
