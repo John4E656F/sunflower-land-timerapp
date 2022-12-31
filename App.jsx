@@ -6,11 +6,31 @@ import { useState, useEffect, useRef } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TimerView from './src/TimerView/index';
-import BoostView from './src/Boost View/index';
+import BoostView from './src/BoostView/index';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [boostState, setBoostState] = useState({
+    treeHugger: false,
+    apprenticeBeaver: false,
+    constructionBeaver: false,
+    coalFace: false,
+    seedSpecialist: false,
+    nancy: false,
+    scarecrow: false,
+    kuebiko: false,
+    mysteriousParsnip: false,
+    rushHour: false,
+  });
+
+  const updateBoost = (boost) => {
+    setBoostState((prev) => ({
+      ...prev.boost,
+      boost: true,
+    }));
+  };
+
   return (
     <NavigationContainer theme={DarkTheme}>
       <StatusBar style='auto' />
@@ -27,8 +47,8 @@ export default function App() {
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#95C8F4',
-          tabBarInactiveTintColor: 'red',
+          tabBarActiveTintColor: 'red',
+          tabBarInactiveTintColor: '#95C8F4',
         })}
       >
         <Tab.Screen
@@ -51,7 +71,9 @@ export default function App() {
               backgroundColor: '#f4511e',
             },
           }}
-        />
+        >
+          {() => <TimerView updateBoost={() => updateBoost(boost)} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );
