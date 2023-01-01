@@ -18,10 +18,19 @@
     },
     "production": {
       "autoIncrement": true,
-      "channel": "production"
+      "channel": "production",
+      "android": {
+        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
+      }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./pc-api-5219278024873915682-667-eea38d23aa8e.json",
+        "track": "internal",
+        "releaseStatus": "inProgress"
+      }
+    }
   }
 }
