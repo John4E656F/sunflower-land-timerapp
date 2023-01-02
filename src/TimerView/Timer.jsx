@@ -2,16 +2,15 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 import onDisplayNotification from '../../Utils/Notification';
 import checkItem from '../../Utils/CheckItem';
+import { getObjectData } from '../../Utils/Storage';
 
-export default function Timer({ itemName, isActive, endTimer }) {
-  const [countdownState, setCountdownState] = useState(false);
-  const state = checkItem(itemName);
+export default function Timer({ itemName, isActive, endTimer, boostState }) {
+  const [value, setValue] = useState();
+  const [notif, setNotif] = useState();
 
-  let initialValue = state.initialValue;
-  let initialNotif = state.initialNotif;
-
-  const [value, setValue] = useState(initialValue);
-  const [notif, setNotif] = useState(initialNotif, countdownState);
+  useEffect(() => {
+    checkItem({ itemName, boostState, setValue, setNotif });
+  }, [boostState]);
 
   let sDisplay = value % 60;
   const minutesRemaining = parseInt((value - sDisplay) / 60);
@@ -30,9 +29,6 @@ export default function Timer({ itemName, isActive, endTimer }) {
         }, 1000);
       } else if (value === 0) {
         onDisplayNotification(notif, initialValue);
-        let resetState = checkItem(itemName);
-        let value = resetState.initialValue;
-        setValue(value);
         clearInterval(interval);
         endTimer();
       }

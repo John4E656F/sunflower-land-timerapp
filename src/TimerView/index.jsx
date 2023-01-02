@@ -1,18 +1,18 @@
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
-// import { useContext, useState, useEffect, useRef } from 'react';
-// import List from './List';
-// import { Logo } from '../../Utils/Assets';
-// import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../Utils/Context';
+import { useContext, useState, useEffect, useRef } from 'react';
+import List from './List';
+import { Logo } from '../../Utils/Assets';
+import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../Utils/Context';
 
-export default function TimerView() {
-  // const DataTools = useContext(DataToolsContext);
-  // const DataCrops = useContext(DataCropsContext);
-  // const DataFood = useContext(DataFoodContext);
+export default function TimerView({ boostState }) {
+  const DataTools = useContext(DataToolsContext);
+  const DataCrops = useContext(DataCropsContext);
+  const DataFood = useContext(DataFoodContext);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View>
+        <View>
           <View style={styles.logoContainer}>
             <Image style={styles.logo} source={Logo} />
             <Text style={styles.appTitle}>Sunflower Land Timer</Text>
@@ -23,24 +23,24 @@ export default function TimerView() {
             <Text style={styles.title}>Timer</Text>
             <Text style={styles.timerCategory}>Tools</Text>
             <View style={styles.listContainer}>
-              {DataTools.map((item, i) => (
-                <List item={item} key={item + i} />
-              ))}
+              {DataTools.map((item, i) =>
+                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
+              )}
             </View>
             <Text style={styles.timerCategory}>Crops</Text>
             <View style={styles.listContainer}>
-              {DataCrops.map((item, i) => (
-                <List item={item} key={item + i} />
-              ))}
+              {DataCrops.map((item, i) =>
+                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
+              )}
             </View>
             <Text style={styles.timerCategory}>Foods</Text>
             <View style={styles.listContainer}>
-              {DataFood.map((item, i) => (
-                <List item={item} key={item + i} />
-              ))}
+              {DataFood.map((item, i) =>
+                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
+              )}
             </View>
           </View>
-        </View> */}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
