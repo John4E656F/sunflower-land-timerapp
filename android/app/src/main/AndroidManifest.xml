@@ -27,7 +27,6 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="com.john4e656f.sunflowerlandtimerapp"/>
-        <data android:scheme="exp+sunflower-land-timer-app"/>
         <data android:scheme="exp+sunflower-land-timer"/>
       </intent-filter>
     </activity>
