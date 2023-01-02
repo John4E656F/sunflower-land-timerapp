@@ -5,16 +5,12 @@ import checkItem from '../../Utils/CheckItem';
 import { getObjectData } from '../../Utils/Storage';
 
 export default function Timer({ itemName, isActive, endTimer, boostState }) {
-  // console.log(boostState);
-  const [countdownState, setCountdownState] = useState(false);
   const [value, setValue] = useState();
   const [notif, setNotif] = useState();
 
   useEffect(() => {
-    const state = checkItem(itemName, boostState);
-    setValue(state.initialNotif);
-    setNotif(state.initialNotif.countdownState);
-  }, []);
+    checkItem({ itemName, boostState, setValue, setNotif });
+  }, [boostState]);
 
   let sDisplay = value % 60;
   const minutesRemaining = parseInt((value - sDisplay) / 60);
@@ -25,8 +21,6 @@ export default function Timer({ itemName, isActive, endTimer, boostState }) {
   let dDisplay = daysRemaining % 60;
 
   useEffect(() => {
-    // const data = getObjectData();
-    // console.log(data);
     let interval = null;
     if (isActive === true) {
       if (value > 0) {
@@ -35,9 +29,6 @@ export default function Timer({ itemName, isActive, endTimer, boostState }) {
         }, 1000);
       } else if (value === 0) {
         onDisplayNotification(notif, initialValue);
-        let resetState = checkItem(itemName, boostState);
-        let value = resetState.initialValue;
-        setValue(value);
         clearInterval(interval);
         endTimer();
       }

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Timer from './Timer';
 
 export default function ItemList({ item, boostState }) {

@@ -4,7 +4,7 @@ import List from './List';
 import { Logo } from '../../Utils/Assets';
 import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../Utils/Context';
 
-export default function TimerView(boostState) {
+export default function TimerView({ boostState }) {
   const DataTools = useContext(DataToolsContext);
   const DataCrops = useContext(DataCropsContext);
   const DataFood = useContext(DataFoodContext);
@@ -23,21 +23,21 @@ export default function TimerView(boostState) {
             <Text style={styles.title}>Timer</Text>
             <Text style={styles.timerCategory}>Tools</Text>
             <View style={styles.listContainer}>
-              {DataTools.map((item, i) => (
-                <List item={item} key={item + i} boostState={boostState} />
-              ))}
+              {DataTools.map((item, i) =>
+                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
+              )}
             </View>
             <Text style={styles.timerCategory}>Crops</Text>
             <View style={styles.listContainer}>
-              {DataCrops.map((item, i) => (
-                <List item={item} key={item + i} boostState={boostState} />
-              ))}
+              {DataCrops.map((item, i) =>
+                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
+              )}
             </View>
             <Text style={styles.timerCategory}>Foods</Text>
             <View style={styles.listContainer}>
-              {DataFood.map((item, i) => (
-                <List item={item} key={item + i} boostState={boostState} />
-              ))}
+              {DataFood.map((item, i) =>
+                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
+              )}
             </View>
           </View>
         </View>
