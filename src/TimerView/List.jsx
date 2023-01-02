@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Timer from './Timer';
 
-export default function ItemList({ item }) {
+export default function ItemList({ item, boostState }) {
   const [isActive, setIsActive] = useState(false);
   const itemName = item.name;
 
@@ -18,7 +18,7 @@ export default function ItemList({ item }) {
       <View style={[styles.itemContainer, isActive ? styles.active : styles.notActive]}>
         <Image style={styles.itemLogo} source={item.image} />
         <View style={styles.textContainer}>
-          <Timer itemName={itemName} isActive={isActive} endTimer={() => endTimer()} key={itemName} />
+          <Timer itemName={itemName} isActive={isActive} endTimer={() => endTimer()} key={itemName} boostState={boostState} />
         </View>
         {isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
       </View>
