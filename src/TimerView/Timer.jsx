@@ -12,7 +12,7 @@ export default function Timer({ itemName, isActive, endTimer, boostState }) {
     checkItem({ itemName, boostState, setValue, setNotif });
   }, [boostState]);
 
-  let sDisplay = value % 60;
+  let sDisplay = parseInt(value % 60);
   const minutesRemaining = parseInt((value - sDisplay) / 60);
   let mDisplay = minutesRemaining % 60;
   const hoursRemaining = (minutesRemaining - mDisplay) / 60;
@@ -28,7 +28,8 @@ export default function Timer({ itemName, isActive, endTimer, boostState }) {
           setValue(value - 1);
         }, 1000);
       } else if (value === 0) {
-        onDisplayNotification(notif, initialValue);
+        checkItem({ itemName, boostState, setValue, setNotif });
+        onDisplayNotification(notif);
         clearInterval(interval);
         endTimer();
       }
