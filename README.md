@@ -40,4 +40,12 @@ To increase the efficiency of my farm. A timer that will notify when you can har
 
 [<h2>Source:</h2> https://github.com/reduxjs/redux/issues/4443 ](https://github.com/reduxjs/redux/issues/4443)
 
+# To Do
+
+[] Work on dessign
+
+[] Add Assets & Icon
+
+[] ... More Features
+
 </div>

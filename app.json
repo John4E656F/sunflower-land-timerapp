@@ -1,42 +1,45 @@
 {
   "expo": {
-    "name": "SunflowerLand-TimerApp",
-    "slug": "sunflower-land-timer-app",
-    "version": "1.0.0",
+    "name": "SunflowerLand-Timer",
+    "slug": "sunflower-land-timer",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "jsEngine": "hermes",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-screen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
+      "url": "https://u.expo.dev/dc8b3b56-79dc-44db-9162-0e2ee45886f2"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "sdkVersion"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.john4e656f.sunflowerlandtimerapp",
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
     },
     "extra": {
       "eas": {
-        "projectId": "cdafdcdc-6b4e-4a9e-bf3c-ee8d6bde002c"
+        "projectId": "dc8b3b56-79dc-44db-9162-0e2ee45886f2"
       }
     },
-    "owner": "john4e656f",
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    }
+    "plugins": ["@notifee/react-native"],
+    "owner": "john4e656f"
   }
 }
