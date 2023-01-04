@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  name: 'Reindeer Carrot',
   isActive: false,
   value: 86400,
 };

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  name: 'Pumpkin Soup',
   isActive: false,
   value: 86400,
 };

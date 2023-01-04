@@ -2,86 +2,63 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Modal, Text, View, Pressable, ScrollView, SafeAreaView } from 'react-native';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { useState, useEffect, useContext } from 'react';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TimerView from './src/TimerView/index';
 import BoostView from './src/BoostView/index';
-import { storeObjectData } from './Utils/Storage';
-import { getObjectData } from './Utils/Storage';
+// import { storeObjectData } from './Utils/Storage';
+// import { getObjectData } from './Utils/Storage';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [boostState, setBoostState] = useState({
-    treeHugger: false,
-    apprenticeBeaver: false,
-    constructionBeaver: false,
-    coalFace: false,
-    seedSpecialist: false,
-    nancy: false,
-    scarecrow: false,
-    kuebiko: false,
-    mysteriousParsnip: false,
-    rushHour: false,
-  });
-
-  const [newBoostState, setNewBoostState] = useState();
-
-  useEffect(() => {
-    setNewBoostState(boostState);
-  }, []);
-
-  useEffect(() => {
-    storeObjectData(boostState);
-    (async () => {
-      await getObjectData(setNewBoostState);
-    })();
-  }, [boostState]);
-
-  // console.log(newBoostState);
   return (
     <NavigationContainer theme={DarkTheme}>
-      <StatusBar style='auto' />
-      <Tab.Navigator
-        initialRouteName='Timer'
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            if (route.name === 'Timer') {
-              iconName = focused ? 'timer-outline' : 'timer';
-            } else if (route.name === 'Boost') {
-              iconName = focused ? 'construct-outline' : 'construct';
-            }
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'red',
-          tabBarInactiveTintColor: '#95C8F4',
-        })}
-      >
-        <Tab.Screen
-          name='Timer'
-          options={{
-            title: 'Timer',
-            headerStyle: {
-              backgroundColor: '#95C8F4',
+      <Provider store={store}>
+        <StatusBar style='auto' />
+        <Tab.Navigator
+          initialRouteName='Timer'
+          screenOptions={({ route }) => ({
+            headerShown: false,
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              if (route.name === 'Timer') {
+                iconName = focused ? 'timer-outline' : 'timer';
+              } else if (route.name === 'Boost') {
+                iconName = focused ? 'construct-outline' : 'construct';
+              }
+              return <Ionicons name={iconName} size={size} color={color} />;
             },
-          }}
+            tabBarActiveTintColor: 'red',
+            tabBarInactiveTintColor: '#95C8F4',
+          })}
         >
-          {(props) => <TimerView boostState={newBoostState} />}
-        </Tab.Screen>
-        <Tab.Screen
-          name='Boost'
-          options={{
-            title: 'Boost',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-          }}
-        >
-          {() => <BoostView setBoostState={setBoostState} boostState={boostState} />}
-        </Tab.Screen>
-      </Tab.Navigator>
+          <Tab.Screen
+            name='Timer'
+            options={{
+              title: 'Timer',
+              headerStyle: {
+                backgroundColor: '#95C8F4',
+              },
+            }}
+          >
+            {(props) => <TimerView />}
+          </Tab.Screen>
+          <Tab.Screen
+            name='Boost'
+            options={{
+              title: 'Boost',
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+            }}
+          >
+            {() => <BoostView />}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 }

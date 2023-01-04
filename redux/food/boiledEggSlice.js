@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  name: 'Boiled Egg',
   isActive: false,
   value: 86400,
 };

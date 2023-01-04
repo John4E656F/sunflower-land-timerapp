@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  name: 'Parsnip',
   isActive: false,
   value: 14400,
 };

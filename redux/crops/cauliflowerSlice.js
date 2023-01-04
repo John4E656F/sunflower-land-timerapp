@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  name: 'Caulifloqer',
   isActive: false,
   value: 28800,
 };
