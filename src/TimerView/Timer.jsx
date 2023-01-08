@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 // import onDisplayNotification from '../../Utils/Notification';
 // import checkItem from '../../Utils/CheckItem';
-import checkBoost from '../../utils/CheckBoost';
+import checkBoost from '../../utils/checkBoost';
 // import { getObjectData } from '../../Utils/Storage';
 
 export default function Timer({ itemName, data, isActive, endTimer, dispatch }) {
@@ -31,7 +31,7 @@ export default function Timer({ itemName, data, isActive, endTimer, dispatch }) 
       }
       return () => clearInterval(interval);
     } else {
-      checkBoost({ dispatch, itemName, data, setValue });
+      // checkBoost({ dispatch, itemName, data, setValue });
       setValue(data.value);
     }
   }, [isActive, value]);

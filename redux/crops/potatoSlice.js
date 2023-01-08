@@ -12,6 +12,14 @@ const initialState = {
     value: 0.15,
     isActive: false,
   },
+  scarecrow: {
+    value: 0.15,
+    isActive: false,
+  },
+  kuebiko: {
+    value: 0.15,
+    isActive: false,
+  },
 };
 
 export const potatoSlice = createSlice({
@@ -21,16 +29,27 @@ export const potatoSlice = createSlice({
     startpotatoCounter: (state, action) => {
       state.isActive = action.payload;
     },
-    setseedSpecialist: (state) => {
-      state.seedSpecialist.isActive = !state.treeHugger.isActive;
-      state.value = state.seedSpecialist.isActive === false ? state.value : state.value - state.value * state.seedSpecialist.value;
+    setPotatoSeedSpecialist: (state) => {
+      state.seedSpecialist.isActive = !state.seedSpecialist.isActive;
+      state.value = state.seedSpecialist.isActive === false ? state.value : state.value - state.value * 0.05;
     },
-    setNancy: (state) => {
-      state.nancy.isActive = !state.nancy.isActive;
-      state.value = state.nancy.isActive === false ? state.value : state.value - state.value * 0.2;
+    setPotatoNancy: (state) => {
+      state.nancy.isActive = state.scarecrow.isActive || state.kuebiko.isActive ? false : !state.apprenticeBeaver.isActive;
+      state.value = state.nancy.isActive === false ? state.value : state.value - state.value * 0.15;
+    },
+    setPotatoScarecrow: (state) => {
+      state.nancy.isActive ? (state.nancy.isActive = false) : null;
+      state.scarecrow.isActive = state.kuebiko.isActive ? false : !state.scarecrow.isActive;
+      state.value = state.nancy.isActive === false ? state.value : state.value - state.value * 0.15;
+    },
+    setPotatoKuebiko: (state) => {
+      state.nancy.isActive ? (state.nancy.isActive = false) : null;
+      state.scarecrow.isActive ? (state.scarecrow.isActive = false) : null;
+      state.kuebiko.isActive = !state.kuebiko.isActive;
+      state.value = state.kuebiko.isActive === false ? state.value : state.value - state.value * 0.15;
     },
   },
 });
 
-export const { startpotatoCounter } = potatoSlice.actions;
+export const { startpotatoCounter, setPotatoSeedSpecialist, setPotatoNancy, setPotatoScarecrow, setPotatoKuebiko } = potatoSlice.actions;
 export default potatoSlice.reducer;

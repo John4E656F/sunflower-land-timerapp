@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, Switch, Image, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
-import checkBoost from '../../utils/CheckBoost';
+import checkBoost from '../../utils/checkBoost';
 import getStore from '../../utils/getStore';
 // import CheckBoostState from '../../Utils/CheckBoostState';
 
 export default function ItemList({ item, dispatch, data }) {
   const [isActive, setIsActive] = useState(false);
   const itemName = item.name;
-
-  const storeData = getStore({ itemName });
+  // console.log(itemName);
+  // const storeData = getStore({ itemName });
+  // // console.log(storeData);
   const toggleSwitch = () => {
     checkBoost({ dispatch, itemName, data });
     setIsActive((previousState) => !previousState);

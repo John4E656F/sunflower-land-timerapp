@@ -36,13 +36,11 @@ export const axeSlice = createSlice({
     },
     setApprenticeBeaver: (state) => {
       state.apprenticeBeaver.isActive = state.constructionBeaver.isActive ? false : !state.apprenticeBeaver.isActive;
-      state.treeHugger.isActive === true ? (state.treeHugger.isActive = false) : null;
       state.value = state.apprenticeBeaver.isActive === false ? state.value : state.value - state.value * 0.5;
     },
     setConstructionBeaver: (state) => {
       state.constructionBeaver.isActive = !state.constructionBeaver.isActive;
       state.apprenticeBeaver.isActive === true ? (state.apprenticeBeaver.isActive = false) : null;
-      state.treeHugger.isActive === true ? (state.treeHugger.isActive = false) : null;
       state.value = state.constructionBeaver.isActive === false ? state.value : state.value - state.value * 0.5;
     },
   },
