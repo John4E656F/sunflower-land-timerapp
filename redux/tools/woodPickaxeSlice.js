@@ -24,7 +24,7 @@ export const woodPickaxeSlice = createSlice({
     },
     setCoalFace: (state) => {
       state.coalFace.isActive = !state.coalFace.isActive;
-      state.value = state.coalFace.isActive === false ? state.value : state.value - state.value * 0.2;
+      state.value = state.coalFace.isActive === false ? (state.value = (state.value / (1 - 0.2)) * 1) : state.value - state.value * 0.2;
     },
   },
 });

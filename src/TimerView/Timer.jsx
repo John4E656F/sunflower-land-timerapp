@@ -35,7 +35,7 @@ export default function Timer({ itemName, data, isActive, endTimer, dispatch }) 
       // checkBoost({ dispatch, itemName, data, setValue });
       setValue(data.value);
     }
-  }, [isActive, data.value]);
+  }, [isActive, value, data.value]);
 
   return (
     <Text style={[styles.timerText, isActive ? styles.timerActive : styles.timerInActive]}>

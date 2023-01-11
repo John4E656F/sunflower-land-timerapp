@@ -9,13 +9,13 @@ export default function ItemList({ item, dispatch, data }) {
   const storeData = getStoreByBoost({ itemName });
   const [isActive, setIsActive] = useState(storeData);
 
-  // console.log(itemName);
   useEffect(() => {
     setIsActive(storeData);
   }, [storeData]);
+
   const toggleSwitch = () => {
-    checkBoost({ dispatch, itemName, data });
-    setIsActive((previousState) => !previousState);
+    checkBoost({ dispatch, itemName });
+    setIsActive(storeData);
   };
 
   return (

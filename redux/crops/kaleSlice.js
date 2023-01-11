@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   name: 'Kale',
   isActive: false,
-  value: 14400,
+  value: 129600,
   seedSpecialist: {
     value: 0.05,
     isActive: false,
@@ -31,22 +31,28 @@ export const kaleSlice = createSlice({
     },
     setKaleSeedSpecialist: (state) => {
       state.seedSpecialist.isActive = !state.seedSpecialist.isActive;
-      state.value = state.seedSpecialist.isActive === false ? state.value : state.value - state.value * 0.05;
+      state.value = state.seedSpecialist.isActive === false ? (state.value / (1 - 0.05)) * 1 : state.value - state.value * 0.05;
     },
     setKaleNancy: (state) => {
-      state.nancy.isActive = state.scarecrow.isActive || state.kuebiko.isActive ? false : !state.nancy.isActive;
-      state.value = state.nancy.isActive === false ? state.value : state.value - state.value * 0.15;
+      state.nancy.isActive = state.scarecrow.isActive === true || state.kuebiko.isActive === true ? false : !state.nancy.isActive;
+      state.scarecrow.isActive === true || state.kuebiko.isActive === true
+        ? (state.value = state.value)
+        : (state.value = state.nancy.isActive === false ? (state.value / (1 - 0.15)) * 1 : state.value - state.value * 0.15);
     },
     setKaleScarecrow: (state) => {
-      state.nancy.isActive ? (state.nancy.isActive = false) : null;
-      state.scarecrow.isActive = state.kuebiko.isActive ? false : !state.scarecrow.isActive;
-      state.value = state.nancy.isActive === false ? state.value : state.value - state.value * 0.15;
+      state.nancy.isActive === true ? ((state.nancy.isActive = false), (state.value = (state.value / (1 - 0.15)) * 1)) : null;
+      state.scarecrow.isActive = state.kuebiko.isActive === true ? false : !state.scarecrow.isActive;
+      state.kuebiko.isActive === true || state.nancy.isActive === true
+        ? (state.value = state.value)
+        : (state.value = state.scarecrow.isActive === false ? (state.value / (1 - 0.15)) * 1 : state.value - state.value * 0.15);
     },
     setKaleKuebiko: (state) => {
-      state.nancy.isActive ? (state.nancy.isActive = false) : null;
-      state.scarecrow.isActive ? (state.scarecrow.isActive = false) : null;
+      state.nancy.isActive === true || state.scarecrow.isActive === true
+        ? ((state.nancy.isActive = false), (state.value = (state.value / (1 - 0.15)) * 1))
+        : null;
+      state.scarecrow.isActive === true ? (state.scarecrow.isActive = false) : null;
       state.kuebiko.isActive = !state.kuebiko.isActive;
-      state.value = state.kuebiko.isActive === false ? state.value : state.value - state.value * 0.15;
+      state.value = state.kuebiko.isActive === false ? (state.value / (1 - 0.15)) * 1 : state.value - state.value * 0.15;
     },
   },
 });

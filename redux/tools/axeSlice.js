@@ -35,16 +35,19 @@ export const axeSlice = createSlice({
     },
     setTreeHugger: (state) => {
       state.treeHugger.isActive = !state.treeHugger.isActive;
-      state.value = state.treeHugger.isActive === false ? state.value + 7200 - state.value : state.value - state.value * 0.2;
+      state.value = state.treeHugger.isActive === false ? (state.value / (1 - 0.2)) * 1 : state.value - state.value * 0.2;
     },
     setApprenticeBeaver: (state) => {
-      state.apprenticeBeaver.isActive = state.constructionBeaver.isActive ? false : !state.apprenticeBeaver.isActive;
-      state.value = state.apprenticeBeaver.isActive === false ? state.value + state.value * 0.5 : state.value - state.value * 0.5;
+      state.apprenticeBeaver.isActive = state.constructionBeaver.isActive === true ? false : !state.apprenticeBeaver.isActive;
+      state.constructionBeaver.isActive === true
+        ? (state.value = state.value)
+        : (state.value = state.apprenticeBeaver.isActive === false ? (state.value / (1 - 0.5)) * 1 : state.value - state.value * 0.5);
     },
     setConstructionBeaver: (state) => {
       state.constructionBeaver.isActive = !state.constructionBeaver.isActive;
+      state.apprenticeBeaver.isActive === true ? (state.value = (state.value / (1 - 0.5)) * 1) : null;
       state.constructionBeaver.isActive === true ? (state.apprenticeBeaver.isActive = false) : null;
-      state.value = state.constructionBeaver.isActive === false ? +state.value * 0.5 : state.value - state.value * 0.5;
+      state.value = state.constructionBeaver.isActive === false ? (state.value / (1 - 0.5)) * 1 : state.value - state.value * 0.5;
     },
   },
 });
