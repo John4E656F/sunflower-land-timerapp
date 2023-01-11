@@ -2,7 +2,7 @@
 export default function checkItem(itemName, boostState) {
   // const boost = boostState.boostState;
   // const treeHugger = boostState.boostState.treeHugger;
-  console.log(boostState);
+  // console.log(boostState);
   let initialValue;
   let initialNotif;
   switch (itemName) {

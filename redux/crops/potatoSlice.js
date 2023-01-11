@@ -34,7 +34,7 @@ export const potatoSlice = createSlice({
       state.value = state.seedSpecialist.isActive === false ? state.value : state.value - state.value * 0.05;
     },
     setPotatoNancy: (state) => {
-      state.nancy.isActive = state.scarecrow.isActive || state.kuebiko.isActive ? false : !state.apprenticeBeaver.isActive;
+      state.nancy.isActive = state.scarecrow.isActive || state.kuebiko.isActive ? false : !state.nancy.isActive;
       state.value = state.nancy.isActive === false ? state.value : state.value - state.value * 0.15;
     },
     setPotatoScarecrow: (state) => {

@@ -7,6 +7,7 @@ import checkBoost from '../../utils/checkBoost';
 
 export default function Timer({ itemName, data, isActive, endTimer, dispatch }) {
   const [value, setValue] = useState();
+  const [loaded, setLoaded] = useState(false);
   const [notif, setNotif] = useState();
 
   let sDisplay = parseInt(value % 60);
@@ -34,7 +35,7 @@ export default function Timer({ itemName, data, isActive, endTimer, dispatch }) 
       // checkBoost({ dispatch, itemName, data, setValue });
       setValue(data.value);
     }
-  }, [isActive, value]);
+  }, [isActive, data.value]);
 
   return (
     <Text style={[styles.timerText, isActive ? styles.timerActive : styles.timerInActive]}>

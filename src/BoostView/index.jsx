@@ -8,7 +8,7 @@ import { DataBoostContext } from '../../utils/Context';
 export default function TimerView() {
   const DataBoosts = useContext(DataBoostContext);
   const dispatch = useDispatch();
-  console.log(DataBoosts);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
