@@ -10,8 +10,8 @@ export const kaleStewSlice = createSlice({
   name: 'kaleStew',
   initialState,
   reducers: {
-    startkaleStewCounter: (state, action) => {
-      state.isActive = action.payload;
+    startkaleStewCounter: (state) => {
+      state.isActive = !state.isActive;
     },
   },
 });

@@ -10,8 +10,8 @@ export const boiledEggSlice = createSlice({
   name: 'boiledEgg',
   initialState,
   reducers: {
-    startboiledEggCounter: (state, action) => {
-      state.isActive = action.payload;
+    startboiledEggCounter: (state) => {
+      state.isActive = !state.isActive;
     },
   },
 });

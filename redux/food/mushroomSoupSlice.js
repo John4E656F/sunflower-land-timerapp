@@ -10,8 +10,8 @@ export const mushroomSoupSlice = createSlice({
   name: 'mushroomSoup',
   initialState,
   reducers: {
-    startmushroomSoupCounter: (state, action) => {
-      state.isActive = action.payload;
+    startmushroomSoupCounter: (state) => {
+      state.isActive = !state.isActive;
     },
   },
 });

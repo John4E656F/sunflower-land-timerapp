@@ -10,8 +10,8 @@ export const bumpkinBrothSlice = createSlice({
   name: 'bumpkinBroth',
   initialState,
   reducers: {
-    startbumpkinBrothCounter: (state, action) => {
-      state.isActive = action.payload;
+    startbumpkinBrothCounter: (state) => {
+      state.isActive = !state.isActive;
     },
   },
 });
