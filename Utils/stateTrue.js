@@ -66,22 +66,22 @@ export default function stateTrue({ dispatch, itemName }) {
     case 'Kale':
       dispatch(startkaleCounter(true));
       break;
-    case 'pumpkinSoup':
+    case 'Pumpkin Soup':
       dispatch(startpumpkinSoupCounter(true));
       break;
-    case 'bumpkinBroth':
+    case 'Bumpkin Broth':
       dispatch(startbumpkinBrothCounter(true));
       break;
-    case 'boiledEgg':
+    case 'Boiled Egg':
       dispatch(startboiledEggCounter(true));
       break;
-    case 'kaleStew':
+    case 'Kale Stew':
       dispatch(startkaleStewCounter(true));
       break;
-    case 'mushroomSoup':
+    case 'Mushroom Soup':
       dispatch(startmushroomSoupCounter(true));
       break;
-    case 'reindeerCarrot':
+    case 'Reindeer Carrot':
       dispatch(startreindeerCarrotCounter(true));
       break;
   }
