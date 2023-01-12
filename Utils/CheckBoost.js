@@ -1,19 +1,24 @@
 //Import Tools Actions
 import { setTreeHugger, setApprenticeBeaver, setConstructionBeaver } from '../redux/tools/axeSlice';
 import { setCoalFace } from '../redux/tools/woodPickaxeSlice';
-import { startStonePickaxeCounter } from '../redux/tools/stonePickaxeSlice';
-import { startIronPickaxeCounter } from '../redux/tools/ironPickaxeSlice';
+
 //Import Crops Actions
-import { startpotatoCounter } from '../redux/crops/potatoSlice';
-import { startpumpkinCounter } from '../redux/crops/pumpkinSlice';
-import { startcarrotCounter } from '../redux/crops/carrotSlice';
-import { startcabbageCounter } from '../redux/crops/cabbageSlice';
-import { startbeetrootCounter } from '../redux/crops/beetrootSlice';
-import { startcauliflowerCounter } from '../redux/crops/cauliflowerSlice';
-import { startparsnipCounter } from '../redux/crops/parsnipSlice';
-import { startradishCounter } from '../redux/crops/radishSlice';
-import { startwheatCounter } from '../redux/crops/wheatSlice';
-import { startkaleCounter } from '../redux/crops/kaleSlice';
+import { setPotatoSeedSpecialist, setPotatoNancy, setPotatoScarecrow, setPotatoKuebiko } from '../redux/crops/potatoSlice';
+import { setPumpkinSeedSpecialist, setPumpkinNancy, setPumpkinScarecrow, setPumpkinKuebiko } from '../redux/crops/pumpkinSlice';
+import { setCarrotSeedSpecialist, setCarrotNancy, setCarrotScarecrow, setCarrotKuebiko } from '../redux/crops/carrotSlice';
+import { setCabbageSeedSpecialist, setCabbageNancy, setCabbageScarecrow, setCabbageKuebiko } from '../redux/crops/cabbageSlice';
+import { setBeetrootSeedSpecialist, setBeetrootNancy, setBeetrootScarecrow, setBeetrootKuebiko } from '../redux/crops/beetrootSlice';
+import { setCauliflowerSeedSpecialist, setCauliflowerNancy, setCauliflowerScarecrow, setCauliflowerKuebiko } from '../redux/crops/cauliflowerSlice';
+import {
+  setParsnipMysteriousParsnip,
+  setParsnipSeedSpecialist,
+  setParsnipNancy,
+  setParsnipScarecrow,
+  setParsnipKuebiko,
+} from '../redux/crops/parsnipSlice';
+import { setRadishSeedSpecialist, setRadishNancy, setRadishScarecrow, setRadishKuebiko } from '../redux/crops/radishSlice';
+import { setWheatSeedSpecialist, setWheatNancy, setWheatScarecrow, setWheatKuebiko } from '../redux/crops/wheatSlice';
+import { setKaleSeedSpecialist, setKaleNancy, setKaleScarecrow, setKaleKuebiko } from '../redux/crops/kaleSlice';
 //Import Food Actions
 import { startpumpkinSoupCounter } from '../redux/food/pumpkinSoupSlice';
 import { startbumpkinBrothCounter } from '../redux/food/bumpkinBrothSlice';
@@ -22,79 +27,69 @@ import { startkaleStewCounter } from '../redux/food/kaleStewSlice';
 import { startmushroomSoupCounter } from '../redux/food/mushroomSoupSlice';
 import { startreindeerCarrotCounter } from '../redux/food/reindeerCarrotSlice';
 
-export default function checkBoost({ dispatch, itemName, data, setValue }) {
+export default function checkBoost({ dispatch, itemName }) {
   switch (itemName) {
-    case 'Axe':
-      const treeHugger = data.treeHugger;
-      const apprenticeBeaver = data.apprenticeBeaver;
-      const constructionBeaver = data.constructionBeaver;
-      if (treeHugger.isActive === true) {
-        dispatch(setTreeHugger());
-      } else if (apprenticeBeaver.isActive === true) {
-        dispatch(setApprenticeBeaver());
-      } else if (constructionBeaver.isActive === true) {
-        dispatch(setConstructionBeaver());
-      }
+    case 'treeHugger':
+      dispatch(setTreeHugger());
       break;
-    case 'Wood Pickaxe':
-      const coalFace = data.coalFace;
-      if (coalFace.isActive === true) {
-        dispatch(setCoalFace());
-      }
+    case 'apprenticeBeaver':
+      dispatch(setApprenticeBeaver());
       break;
-    // case 'Stone Pickaxe':
-    //   dispatch(startStonePickaxeCounter(true));
-    //   break;
-    // case 'Iron Pickaxe':
-    //   dispatch(startIronPickaxeCounter(true));
-    //   break;
-    // case 'Potato':
-    //   dispatch(startpotatoCounter(true));
-    //   break;
-    // case 'Pumpkin':
-    //   dispatch(startpumpkinCounter(true));
-    //   break;
-    // case 'Carrot':
-    //   dispatch(startcarrotCounter(true));
-    //   break;
-    // case 'Cabbage':
-    //   dispatch(startcabbageCounter(true));
-    //   break;
-    // case 'Beetroot':
-    //   dispatch(startbeetrootCounter(true));
-    //   break;
-    // case 'Cauliflower':
-    //   dispatch(startcauliflowerCounter(true));
-    //   break;
-    // case 'Parsnip':
-    //   dispatch(startparsnipCounter(true));
-    //   break;
-    // case 'Radish':
-    //   dispatch(startradishCounter(true));
-    //   break;
-    // case 'Wheat':
-    //   dispatch(startwheatCounter(true));
-    //   break;
-    // case 'Kale':
-    //   dispatch(startkaleCounter(true));
-    //   break;
-    // case 'pumpkinSoup':
-    //   dispatch(startpumpkinSoupCounter(true));
-    //   break;
-    // case 'bumpkinBroth':
-    //   dispatch(startbumpkinBrothCounter(true));
-    //   break;
-    // case 'boiledEgg':
-    //   dispatch(startboiledEggCounter(true));
-    //   break;
-    // case 'kaleStew':
-    //   dispatch(startkaleStewCounter(true));
-    //   break;
-    // case 'mushroomSoup':
-    //   dispatch(startmushroomSoupCounter(true));
-    //   break;
-    // case 'reindeerCarrot':
-    //   dispatch(startreindeerCarrotCounter(true));
-    //   break;
+    case 'constructionBeaver':
+      dispatch(setConstructionBeaver());
+      break;
+    case 'seedSpecialist':
+      dispatch(setPotatoSeedSpecialist());
+      dispatch(setPumpkinSeedSpecialist());
+      dispatch(setCarrotSeedSpecialist());
+      dispatch(setCabbageSeedSpecialist());
+      dispatch(setBeetrootSeedSpecialist());
+      dispatch(setCauliflowerSeedSpecialist());
+      dispatch(setParsnipSeedSpecialist());
+      dispatch(setRadishSeedSpecialist());
+      dispatch(setWheatSeedSpecialist());
+      dispatch(setKaleSeedSpecialist());
+      break;
+    case 'nancy':
+      dispatch(setPotatoNancy());
+      dispatch(setPumpkinNancy());
+      dispatch(setCarrotNancy());
+      dispatch(setCabbageNancy());
+      dispatch(setBeetrootNancy());
+      dispatch(setCauliflowerNancy());
+      dispatch(setParsnipNancy());
+      dispatch(setRadishNancy());
+      dispatch(setWheatNancy());
+      dispatch(setKaleNancy());
+      break;
+    case 'scarecrow':
+      dispatch(setPotatoScarecrow());
+      dispatch(setPumpkinScarecrow());
+      dispatch(setCarrotScarecrow());
+      dispatch(setCabbageScarecrow());
+      dispatch(setBeetrootScarecrow());
+      dispatch(setCauliflowerScarecrow());
+      dispatch(setParsnipScarecrow());
+      dispatch(setRadishScarecrow());
+      dispatch(setWheatScarecrow());
+      dispatch(setKaleScarecrow());
+      break;
+    case 'kuebiko':
+      dispatch(setPotatoKuebiko());
+      dispatch(setPumpkinKuebiko());
+      dispatch(setCarrotKuebiko());
+      dispatch(setCabbageKuebiko());
+      dispatch(setBeetrootKuebiko());
+      dispatch(setCauliflowerKuebiko());
+      dispatch(setParsnipKuebiko());
+      dispatch(setRadishKuebiko());
+      dispatch(setWheatKuebiko());
+      dispatch(setKaleKuebiko());
+      break;
+    case 'mysteriousParsnip':
+      dispatch(setParsnipMysteriousParsnip());
+      break;
+    // case 'rushHour':
+    //   dispatch(setRushHour());
   }
 }

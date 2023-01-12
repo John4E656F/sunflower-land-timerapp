@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-// import onDisplayNotification from '../../Utils/Notification';
+import onDisplayNotification from '../../utils/Notification';
 // import checkItem from '../../Utils/CheckItem';
 import checkBoost from '../../utils/checkBoost';
 // import { getObjectData } from '../../Utils/Storage';
@@ -26,7 +26,7 @@ export default function Timer({ itemName, data, isActive, endTimer, dispatch }) 
           setValue(value - 1);
         }, 1000);
       } else if (value === 0) {
-        // onDisplayNotification(notif, initialValue);
+        onDisplayNotification(notif, initialValue);
         clearInterval(interval);
         endTimer();
       }
