@@ -3,7 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 import schedulePushNotification from '../../utils/Notification';
 import stateEnd from '../../utils/stateEnd';
 import checkBoost from '../../utils/checkBoost';
-// import { getObjectData } from '../../Utils/Storage';
+import { startBackgroundTask } from '../../utils/background';
+import registerBackgroundFetchAsync from '../../utils/background';
+import unregisterBackgroundFetchAsync from '../../utils/background';
 
 export default function Timer({ itemName, data, isActive, dispatch }) {
   const [value, setValue] = useState();
@@ -21,9 +23,10 @@ export default function Timer({ itemName, data, isActive, dispatch }) {
     let interval = null;
     if (isActive === true) {
       if (value > 0) {
-        interval = setInterval(() => {
-          setValue(value - 1);
-        }, 1000);
+        startBackgroundTask(interval, itemName, value, setValue);
+        // interval = setInterval(() => {
+        //   setValue(value - 1);
+        // }, 1000);
       } else if (value === 0) {
         schedulePushNotification(itemName, data);
         stateEnd({ dispatch, itemName });
