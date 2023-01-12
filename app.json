@@ -39,7 +39,6 @@
       }
     },
     "plugins": [
-      "@notifee/react-native",
       [
         "expo-build-properties",
         {

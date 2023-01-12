@@ -10,8 +10,8 @@ export const reindeerCarrotSlice = createSlice({
   name: 'reindeerCarrot',
   initialState,
   reducers: {
-    startreindeerCarrotCounter: (state, action) => {
-      state.isActive = action.payload;
+    startreindeerCarrotCounter: (state) => {
+      state.isActive = !state.isActive;
     },
   },
 });

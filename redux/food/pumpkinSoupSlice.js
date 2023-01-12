@@ -10,8 +10,8 @@ export const pumpkinSoupSlice = createSlice({
   name: 'pumpkinSoup',
   initialState,
   reducers: {
-    startpumpkinSoupCounter: (state, action) => {
-      state.isActive = action.payload;
+    startpumpkinSoupCounter: (state) => {
+      state.isActive = !state.isActive;
     },
   },
 });
