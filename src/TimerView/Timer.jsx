@@ -1,18 +1,16 @@
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import onDisplayNotification from '../../Utils/Notification';
-import checkItem from '../../Utils/CheckItem';
-import { getObjectData } from '../../Utils/Storage';
+// import onDisplayNotification from '../../Utils/Notification';
+// import checkItem from '../../Utils/CheckItem';
+import checkBoost from '../../utils/checkBoost';
+// import { getObjectData } from '../../Utils/Storage';
 
-export default function Timer({ itemName, isActive, endTimer, boostState }) {
+export default function Timer({ itemName, data, isActive, endTimer, dispatch }) {
   const [value, setValue] = useState();
+  const [loaded, setLoaded] = useState(false);
   const [notif, setNotif] = useState();
 
-  useEffect(() => {
-    checkItem({ itemName, boostState, setValue, setNotif });
-  }, [boostState]);
-
-  let sDisplay = value % 60;
+  let sDisplay = parseInt(value % 60);
   const minutesRemaining = parseInt((value - sDisplay) / 60);
   let mDisplay = minutesRemaining % 60;
   const hoursRemaining = (minutesRemaining - mDisplay) / 60;
@@ -28,13 +26,16 @@ export default function Timer({ itemName, isActive, endTimer, boostState }) {
           setValue(value - 1);
         }, 1000);
       } else if (value === 0) {
-        onDisplayNotification(notif, initialValue);
+        // onDisplayNotification(notif, initialValue);
         clearInterval(interval);
         endTimer();
       }
       return () => clearInterval(interval);
+    } else {
+      // checkBoost({ dispatch, itemName, data, setValue });
+      setValue(data.value);
     }
-  }, [isActive, value]);
+  }, [isActive, value, data.value]);
 
   return (
     <Text style={[styles.timerText, isActive ? styles.timerActive : styles.timerInActive]}>

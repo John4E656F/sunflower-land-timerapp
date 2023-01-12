@@ -1,6 +1,11 @@
 import { registerRootComponent } from 'expo';
+// import * as BackgroundFetch from 'expo-background-fetch';
+// import * as TaskManager from 'expo-task-manager';
 
 import App from './App';
+
+// const FETCH_TASKNAME = 'countdown-task';
+// const INTERVAL = 60;
 
 // notifee.onBackgroundEvent(async ({ type, detail }) => {
 //     const { notification, pressAction } = detail;

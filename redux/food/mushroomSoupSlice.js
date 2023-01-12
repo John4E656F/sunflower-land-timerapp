@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  name: 'Mushrrom Soup',
   isActive: false,
   value: 86400,
 };

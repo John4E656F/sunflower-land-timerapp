@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { useContext, useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import BoostListItem from './BoostListItem';
-import { Logo } from '../../Utils/Assets';
-import { DataBoostContext } from '../../Utils/Context';
+import { Logo } from '../../utils/Assets';
+import { DataBoostContext } from '../../utils/Context';
 
-export default function TimerView({ boostState, setBoostState }) {
+export default function TimerView() {
   const DataBoosts = useContext(DataBoostContext);
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -22,7 +24,7 @@ export default function TimerView({ boostState, setBoostState }) {
             <Text style={styles.timerCategory}>Tools</Text>
             <View style={styles.listContainer}>
               {DataBoosts.map((item, i) => (
-                <BoostListItem item={item} key={item + i} boostState={boostState} setBoostState={setBoostState} />
+                <BoostListItem item={item} key={item + i} dispatch={dispatch} />
               ))}
             </View>
           </View>

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Switch, Image, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
-import CheckBoost from '../../Utils/CheckBoost';
+// import CheckBoost from '../../Utils/CheckBoost';
 import CheckBoostState from '../../Utils/CheckBoostState';
 
 export default function ItemList({ item, boostState, setBoostState }) {
@@ -8,7 +8,7 @@ export default function ItemList({ item, boostState, setBoostState }) {
   const itemName = item.name;
 
   const toggleSwitch = () => {
-    CheckBoost(itemName, setBoostState);
+    // CheckBoost(itemName, setBoostState);
     switch (itemName) {
       case 'apprenticeBeaver':
         return setIsActive(boostState.constructionBeaver === true ? false : boostState.apprenticeBeaver);
