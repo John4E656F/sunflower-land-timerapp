@@ -1,25 +1,57 @@
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { useState, useContext, useEffect } from 'react';
+import { AppState, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { useRef, useState, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import getStore from '../../utils/getStore';
 import stateTrue from '../../utils/stateTrue';
+import stateEnd from '../../utils/stateEnd';
 import Timer from './Timer';
+import schedulePushNotification from '../../utils/Notification';
+import registerBackgroundFetchAsync from '../../utils/registerNotification';
 
 export default function ItemList({ item }) {
+  const appState = useRef(AppState.currentState);
   const itemName = item.name;
   const dispatch = useDispatch();
   const storeData = getStore({ itemName });
 
+  // console.log(appState.current);
+  // if (appState.current !== 'active') {
+  //   console.log(appState);
+  // }
+  // async function startBackgroundTimer() {
+
+  // }
+
   const startTimer = () => {
     stateTrue({ dispatch, itemName });
+    // schedulePushNotification(itemName, storeData);
+    // registerBackgroundFetchAsync({ itemName });
   };
+
+  const [value, setValue] = useState();
+
+  useEffect(() => {
+    let interval = null;
+    if (storeData.isActive === true) {
+      if (value > 0) {
+        interval = setInterval(() => {
+          setValue(value - 1);
+        }, 1000);
+      } else if (value === 0) {
+        // stateEnd({ dispatch, itemName });
+      }
+      return () => clearInterval(interval);
+    } else {
+      setValue(storeData.value);
+    }
+  }, [storeData.isActive, value, storeData.value]);
 
   return (
     <TouchableOpacity stle={styles.startBtn} onPress={() => startTimer()}>
       <View style={[styles.itemContainer, storeData.isActive ? styles.active : styles.notActive]}>
         <Image style={styles.itemLogo} source={item.image} />
         <View style={styles.textContainer}>
-          <Timer itemName={itemName} data={storeData} isActive={storeData.isActive} key={itemName} dispatch={dispatch} />
+          <Timer itemName={itemName} value={value} data={storeData} isActive={storeData.isActive} key={itemName} dispatch={dispatch} />
         </View>
         {storeData.isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
       </View>

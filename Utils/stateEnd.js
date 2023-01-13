@@ -22,67 +22,67 @@ import { startkaleStewCounter } from '../redux/food/kaleStewSlice';
 import { startmushroomSoupCounter } from '../redux/food/mushroomSoupSlice';
 import { startreindeerCarrotCounter } from '../redux/food/reindeerCarrotSlice';
 
-export default function stateEnd({ itemName }) {
+export default function stateEnd({ itemName, dispatch }) {
   switch (itemName) {
     case 'Axe':
-      dispatch(startAxeCounter(false));
+      dispatch(startAxeCounter());
       break;
     case 'Wood Pickaxe':
-      dispatch(startWoodPickaxeCounter(false));
+      dispatch(startWoodPickaxeCounter());
       break;
     case 'Stone Pickaxe':
-      dispatch(startStonePickaxeCounter(false));
+      dispatch(startStonePickaxeCounter());
       break;
     case 'Iron Pickaxe':
-      dispatch(startIronPickaxeCounter(false));
+      dispatch(startIronPickaxeCounter());
       break;
     case 'Potato':
-      dispatch(startpotatoCounter(false));
+      dispatch(startpotatoCounter());
       break;
     case 'Pumpkin':
-      dispatch(startpumpkinCounter(false));
+      dispatch(startpumpkinCounter());
       break;
     case 'Carrot':
-      dispatch(startcarrotCounter(false));
+      dispatch(startcarrotCounter());
       break;
     case 'Cabbage':
-      dispatch(startcabbageCounter(false));
+      dispatch(startcabbageCounter());
       break;
     case 'Beetroot':
-      dispatch(startbeetrootCounter(false));
+      dispatch(startbeetrootCounter());
       break;
     case 'Cauliflower':
-      dispatch(startcauliflowerCounter(false));
+      dispatch(startcauliflowerCounter());
       break;
     case 'Parsnip':
-      dispatch(startparsnipCounter(false));
+      dispatch(startparsnipCounter());
       break;
     case 'Radish':
-      dispatch(startradishCounter(false));
+      dispatch(startradishCounter());
       break;
     case 'Wheat':
-      dispatch(startwheatCounter(false));
+      dispatch(startwheatCounter());
       break;
     case 'Kale':
-      dispatch(startkaleCounter(false));
+      dispatch(startkaleCounter());
       break;
-    case 'pumpkinSoup':
-      dispatch(startpumpkinSoupCounter(false));
+    case 'Pumpkin Soup':
+      dispatch(startpumpkinSoupCounter());
       break;
-    case 'bumpkinBroth':
-      dispatch(startbumpkinBrothCounter(false));
+    case 'Bumpkin Broth':
+      dispatch(startbumpkinBrothCounter());
       break;
-    case 'boiledEgg':
-      dispatch(startboiledEggCounter(false));
+    case 'Boiled Egg':
+      dispatch(startboiledEggCounter());
       break;
-    case 'kaleStew':
-      dispatch(startkaleStewCounter(false));
+    case 'Kale Stew':
+      dispatch(startkaleStewCounter());
       break;
-    case 'mushroomSoup':
-      dispatch(startmushroomSoupCounter(false));
+    case 'Mushroom Soup':
+      dispatch(startmushroomSoupCounter());
       break;
-    case 'reindeerCarrot':
-      dispatch(startreindeerCarrotCounter(false));
+    case 'Reindeer Carrot':
+      dispatch(startreindeerCarrotCounter());
       break;
   }
 }
