@@ -5,7 +5,7 @@ import getStore from '../../utils/getStore';
 import stateTrue from '../../utils/stateTrue';
 import stateEnd from '../../utils/stateEnd';
 import Timer from './Timer';
-import schedulePushNotification from '../../utils/Notification';
+// import schedulePushNotification from '../../utils/Notification';
 import registerBackgroundFetchAsync from '../../utils/registerNotification';
 
 export default function ItemList({ item }) {
