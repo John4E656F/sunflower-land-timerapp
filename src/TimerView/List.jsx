@@ -5,29 +5,14 @@ import getStore from '../../utils/getStore';
 import stateTrue from '../../utils/stateTrue';
 import stateEnd from '../../utils/stateEnd';
 import Timer from './Timer';
-// import schedulePushNotification from '../../utils/Notification';
-import registerBackgroundFetchAsync from '../../utils/registerNotification';
+import schedulePushNotification from '../../utils/Notification';
+import { storeStringData, getElapsedTime } from '../../utils/Storage';
 
-export default function ItemList({ item }) {
-  const appState = useRef(AppState.currentState);
+export default function ItemList({ item, reset, setResetCount }) {
+  // const appState = useRef(AppState.currentState);
   const itemName = item.name;
   const dispatch = useDispatch();
   const storeData = getStore({ itemName });
-
-  // console.log(appState.current);
-  // if (appState.current !== 'active') {
-  //   console.log(appState);
-  // }
-  // async function startBackgroundTimer() {
-
-  // }
-
-  const startTimer = () => {
-    stateTrue({ dispatch, itemName });
-    // schedulePushNotification(itemName, storeData);
-    // registerBackgroundFetchAsync({ itemName });
-  };
-
   const [value, setValue] = useState();
 
   useEffect(() => {
@@ -38,13 +23,25 @@ export default function ItemList({ item }) {
           setValue(value - 1);
         }, 1000);
       } else if (value === 0) {
-        // stateEnd({ dispatch, itemName });
+        stateEnd({ dispatch, itemName });
       }
       return () => clearInterval(interval);
+    } else if (reset) {
+      // console.log('ok');
+      const elapsed = getElapsedTime(itemName);
+      // console.log(getElapsedTime);
+      setResetCount(false);
     } else {
       setValue(storeData.value);
     }
-  }, [storeData.isActive, value, storeData.value]);
+  }, [storeData.isActive, value, storeData.value, reset]);
+
+  const startTimer = () => {
+    stateTrue({ dispatch, itemName });
+    schedulePushNotification(storeData);
+    storeStringData(itemName);
+    // registerBackgroundFetchAsync(itemName);
+  };
 
   return (
     <TouchableOpacity stle={styles.startBtn} onPress={() => startTimer()}>
