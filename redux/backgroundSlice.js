@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  ExponentPushToken: null,
+  duration: null,
 };
 
-export const notificationSlice = createSlice({
-  name: 'notification',
+export const backgroundDurationSlice = createSlice({
+  name: 'backgroundDuration',
   initialState,
   reducers: {
-    setPushToken: (state, action) => {
-      state.ExponentPushToken = action.payload;
+    setDuration: (state, action) => {
+      state.duration = action.payload;
     },
   },
 });
 
-export const { setPushToken } = notificationSlice.actions;
-export default notificationSlice.reducer;
+export const { setPushToken } = backgroundDurationSlice.actions;
+export default backgroundDurationSlice.reducer;

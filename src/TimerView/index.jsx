@@ -11,31 +11,29 @@ export default function TimerView() {
   const DataCrops = useContext(DataCropsContext);
   const DataFood = useContext(DataFoodContext);
   const appState = useRef(AppState.currentState);
-  const [appStateVisible, setAppStateVisible] = useState(appState.current);
   const [resetCount, setResetCount] = useState(false);
-  const [inBackground, setInBackground] = useState(false);
 
+  let backgroundDuration;
+
+  //send bakgroundDuration to redux then use it inside List for calculation
   useEffect(() => {
     let initialTime;
     const subscription = AppState.addEventListener('change', (nextAppState) => {
       if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
         console.log('App has come to the foreground!');
         setResetCount(true);
-        setInBackground(false);
         const endTime = DateTime.now();
         console.log(endTime);
         const end = DateTime.fromISO(endTime);
         const start = DateTime.fromISO(initialTime);
         var duration = end.diff(start).toObject();
-
-        console.log(duration);
+        backgroundDuration = Math.floor((duration.milliseconds / 1000) % 60);
+        console.log(backgroundDuration);
       } else {
-        setInBackground(true);
         initialTime = DateTime.now();
         console.log(initialTime);
       }
       appState.current = nextAppState;
-      setAppStateVisible(appState.current);
     });
 
     return () => {
@@ -58,19 +56,19 @@ export default function TimerView() {
             <Text style={styles.timerCategory}>Tools</Text>
             <View style={styles.listContainer}>
               {DataTools.map((item, i) => (
-                <List item={item} key={item + i} reset={resetCount} inBackground={inBackground} />
+                <List item={item} key={item + i} reset={resetCount} />
               ))}
             </View>
             <Text style={styles.timerCategory}>Crops</Text>
             <View style={styles.listContainer}>
               {DataCrops.map((item, i) => (
-                <List item={item} key={item + i} reset={resetCount} inBackground={inBackground} />
+                <List item={item} key={item + i} reset={resetCount} />
               ))}
             </View>
             <Text style={styles.timerCategory}>Foods</Text>
             <View style={styles.listContainer}>
               {DataFood.map((item, i) => (
-                <List item={item} key={item + i} reset={resetCount} inBackground={inBackground} />
+                <List item={item} key={item + i} reset={resetCount} />
               ))}
             </View>
           </View>

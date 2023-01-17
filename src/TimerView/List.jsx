@@ -6,10 +6,8 @@ import stateTrue from '../../utils/stateTrue';
 import stateEnd from '../../utils/stateEnd';
 import Timer from './Timer';
 import schedulePushNotification from '../../utils/Notification';
-import { storeStringData, getElapsedTime, getStringData } from '../../utils/Storage';
 
-export default function ItemList({ item, reset, setResetCount }) {
-  // const appState = useRef(AppState.currentState);
+export default function ItemList({ item, setResetCount }) {
   const itemName = item.name;
   const dispatch = useDispatch();
   const storeData = getStore({ itemName });
@@ -26,19 +24,10 @@ export default function ItemList({ item, reset, setResetCount }) {
         stateEnd({ dispatch, itemName });
       }
       return () => clearTimeout(interval);
-    } else if (reset) {
-      // (async () => {
-      //   const elapsed = await getStringData(itemName);
-      //   if (elapsed !== undefined) {
-      //     console.log('ok');
-      //     // console.log(Date.parse(elapsed));
-      //   }
-      // })();
-      // setResetCount(false);
     } else {
       setValue(storeData.value);
     }
-  }, [storeData.isActive, value, storeData.value, reset]);
+  }, [storeData.isActive, value, storeData.value]);
 
   const startTimer = () => {
     stateTrue({ dispatch, itemName });
