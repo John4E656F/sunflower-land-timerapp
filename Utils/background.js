@@ -10,7 +10,8 @@ export const startBackgroundTask = (interval, itemName, value, setValue) => {
   return interval;
 };
 
-export async function registerBackgroundFetchAsync() {
+export async function registerBackgroundFetchAsync(itemName) {
+  console.log(itemName);
   return BackgroundFetch.registerTaskAsync(itemName, {
     minimumInterval: 60 * 15, // 15 minutes
     stopOnTerminate: false, // android only,

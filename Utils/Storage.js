@@ -1,8 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const storeStringData = async (itemName, value) => {
+export const storeStringData = async (itemName) => {
+  const passKey = JSON.stringify('@' + itemName);
+  console.log(passKey);
+  const passValue = moment(new Date()).format('HH:mm:ss a');
+  console.log(passValue);
   try {
-    await AsyncStorage.setItem(itemName, value);
+    await AsyncStorage.setItem(passKey, passValue);
   } catch (e) {
     console.log(e);
   }
@@ -18,10 +22,27 @@ export const storeObjectData = async (value) => {
 };
 
 export const getStringData = async (itemName) => {
+  const passKey = JSON.stringify('@' + itemName);
   try {
-    const value = await AsyncStorage.getItem(itemName);
+    const value = await AsyncStorage.getItem(passKey);
+
     if (value !== null) {
-      return value;
+      console.log(value);
+      // const startTime = moment(value).format('HH:mm:ss a');
+      // const endTime = moment(new Date()).format('HH:mm:ss a');
+      // console.log(startTime);
+      // console.log(endTime);
+      // let x = new Date();
+      // var duration = moment.duration(x.diff(value));
+      // console.log(duration);
+      // let x = parseInt(duration.asHours());
+      // console.log(x);
+      // try {
+      //   await AsyncStorage.removeItem(passKey);
+      // } catch (e) {
+      //   console.log(e);
+      // }
+      // return value;
     }
   } catch (e) {
     console.log(e);
@@ -37,4 +58,16 @@ export const getObjectData = async (setNewBoostState) => {
     // error reading value
   }
 };
-// export const updateData
+
+export const getElapsedTime = async (itemName) => {
+  const passKey = JSON.stringify('@' + itemName);
+  try {
+    const startTime = await AsyncStorage.getItem(passKey);
+    const now = new Date();
+    console.log(startTime);
+    console.log(now);
+    // return differenceInSeconds(now, Date.parse(startTime));
+  } catch (err) {
+    console.warn(err);
+  }
+};

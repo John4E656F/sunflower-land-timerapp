@@ -19,21 +19,22 @@ export default function ItemList({ item, reset, setResetCount }) {
     let interval = null;
     if (storeData.isActive === true) {
       if (value > 0) {
-        interval = setInterval(() => {
+        interval = setTimeout(() => {
           setValue(value - 1);
         }, 1000);
       } else if (value === 0) {
         stateEnd({ dispatch, itemName });
       }
-      return () => clearInterval(interval);
+      return () => clearTimeout(interval);
     } else if (reset) {
-      (async () => {
-        const elapsed = await getStringData(itemName);
-        if (elapsed !== undefined) {
-          console.log(elapsed);
-        }
-      })();
-      setResetCount(false);
+      // (async () => {
+      //   const elapsed = await getStringData(itemName);
+      //   if (elapsed !== undefined) {
+      //     console.log('ok');
+      //     // console.log(Date.parse(elapsed));
+      //   }
+      // })();
+      // setResetCount(false);
     } else {
       setValue(storeData.value);
     }
@@ -42,7 +43,7 @@ export default function ItemList({ item, reset, setResetCount }) {
   const startTimer = () => {
     stateTrue({ dispatch, itemName });
     schedulePushNotification(storeData);
-    storeStringData(itemName);
+    // storeStringData(itemName);
     // getStringData(itemName);
   };
 

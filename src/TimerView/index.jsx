@@ -4,6 +4,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import List from './List';
 import { Logo } from '../../utils/Assets';
 import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../utils/Context';
+import { DateTime } from 'luxon';
 
 export default function TimerView() {
   const DataTools = useContext(DataToolsContext);
@@ -12,13 +13,26 @@ export default function TimerView() {
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
   const [resetCount, setResetCount] = useState(false);
+  const [inBackground, setInBackground] = useState(false);
 
   useEffect(() => {
+    let initialTime;
     const subscription = AppState.addEventListener('change', (nextAppState) => {
       if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
         console.log('App has come to the foreground!');
         setResetCount(true);
-        // console.log(resetCount);
+        setInBackground(false);
+        const endTime = DateTime.now();
+        console.log(endTime);
+        const end = DateTime.fromISO(endTime);
+        const start = DateTime.fromISO(initialTime);
+        var duration = end.diff(start).toObject();
+
+        console.log(duration);
+      } else {
+        setInBackground(true);
+        initialTime = DateTime.now();
+        console.log(initialTime);
       }
       appState.current = nextAppState;
       setAppStateVisible(appState.current);
@@ -44,19 +58,19 @@ export default function TimerView() {
             <Text style={styles.timerCategory}>Tools</Text>
             <View style={styles.listContainer}>
               {DataTools.map((item, i) => (
-                <List item={item} key={item + i} reset={resetCount} setResetCount={setResetCount} />
+                <List item={item} key={item + i} reset={resetCount} inBackground={inBackground} />
               ))}
             </View>
             <Text style={styles.timerCategory}>Crops</Text>
             <View style={styles.listContainer}>
               {DataCrops.map((item, i) => (
-                <List item={item} key={item + i} reset={resetCount} setResetCount={setResetCount} />
+                <List item={item} key={item + i} reset={resetCount} inBackground={inBackground} />
               ))}
             </View>
             <Text style={styles.timerCategory}>Foods</Text>
             <View style={styles.listContainer}>
               {DataFood.map((item, i) => (
-                <List item={item} key={item + i} reset={resetCount} setResetCount={setResetCount} />
+                <List item={item} key={item + i} reset={resetCount} inBackground={inBackground} />
               ))}
             </View>
           </View>

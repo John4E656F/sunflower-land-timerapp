@@ -5,6 +5,10 @@ import { startpotatoCounter } from './redux/crops/potatoSlice';
 
 import App from './App';
 
+TaskManager.defineTask('@backgroundCounter', async () => {
+  let counter = 0;
+});
+
 TaskManager.defineTask('Potato', async () => {
   const { name, value } = useSelector(({ cropsDomain }) => cropsDomain.potato);
   let time = value;
