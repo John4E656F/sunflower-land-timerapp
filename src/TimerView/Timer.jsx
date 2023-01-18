@@ -1,13 +1,5 @@
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { AppState, useState, useEffect, useRef } from 'react';
-import schedulePushNotification from '../../utils/Notification';
-import stateEnd from '../../utils/stateEnd';
-import checkBoost from '../../utils/checkBoost';
-import { startBackgroundTask } from '../../utils/background';
-import registerBackgroundFetchAsync from '../../utils/background';
-import unregisterBackgroundFetchAsync from '../../utils/background';
-import * as BackgroundFetch from 'expo-background-fetch';
-import * as TaskManager from 'expo-task-manager';
+import { StyleSheet, Text } from 'react-native';
+import { useEffect } from 'react';
 
 export default function Timer({ value, isActive }) {
   let sDisplay = parseInt(value % 60);
@@ -17,22 +9,6 @@ export default function Timer({ value, isActive }) {
   let hDisplay = hoursRemaining % 60;
   const daysRemaining = (hoursRemaining - hDisplay) / 60;
   let dDisplay = daysRemaining % 60;
-
-  useEffect(() => {
-    let interval = null;
-    if (isActive === true) {
-      if (value > 0) {
-        interval = setInterval(() => {
-          setValue(value - 1);
-        }, 1000);
-      } else if (value === 0) {
-        onDisplayNotification(notif, initialValue);
-        clearInterval(interval);
-        endTimer();
-      }
-      return () => clearInterval(interval);
-    }
-  }, [isActive, value]);
 
   return (
     <Text style={[styles.timerText, isActive ? styles.timerActive : styles.timerInActive]}>

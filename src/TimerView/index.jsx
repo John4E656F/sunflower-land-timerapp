@@ -14,7 +14,6 @@ export default function TimerView() {
   const DataFood = useContext(DataFoodContext);
   const appState = useRef(AppState.currentState);
   const [resetCount, setResetCount] = useState(false);
-  const [initialTime, setInitialTime] = useState();
 
   let backgroundDuration;
 

@@ -17,12 +17,12 @@ export default function ItemList({ item, setResetCount }) {
   useEffect(() => {
     let interval = null;
     if (storeData.isActive === true) {
-      if (duration !== null) {
+      if ((duration !== null && value !== null) || undefined) {
         if (value > duration) {
-          setValue(value - duration);
+          let newValue = value - duration;
           if (value > 0) {
             interval = setTimeout(() => {
-              setValue(value - 1);
+              setValue(newValue - 1);
             }, 1000);
           } else if (value === 0) {
             stateEnd({ dispatch, itemName });
@@ -48,8 +48,6 @@ export default function ItemList({ item, setResetCount }) {
   const startTimer = () => {
     stateTrue({ dispatch, itemName });
     schedulePushNotification(storeData);
-    // storeStringData(itemName);
-    // getStringData(itemName);
   };
 
   return (
