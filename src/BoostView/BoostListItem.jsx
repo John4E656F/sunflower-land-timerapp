@@ -1,15 +1,21 @@
 import { StyleSheet, Text, View, Switch, Image, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
-import CheckBoost from '../../Utils/CheckBoost';
-import CheckBoostState from '../../Utils/CheckBoostState';
+import checkBoost from '../../utils/checkBoost';
+import getStoreByBoost from '../../utils/getStoreByBoost';
+// import CheckBoostState from '../../Utils/CheckBoostState';
 
-export default function ItemList({ item, boostState, setBoostState }) {
-  const [isActive, setIsActive] = useState(false);
+export default function ItemList({ item, dispatch, data }) {
   const itemName = item.name;
+  const storeData = getStoreByBoost({ itemName });
+  const [isActive, setIsActive] = useState(storeData);
+
+  useEffect(() => {
+    setIsActive(storeData);
+  }, [storeData]);
 
   const toggleSwitch = () => {
-    CheckBoost(itemName, setBoostState);
-    setIsActive((previousState) => !previousState);
+    checkBoost({ dispatch, itemName });
+    setIsActive(storeData);
   };
 
   return (

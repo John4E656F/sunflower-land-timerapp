@@ -1,26 +1,65 @@
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-import { useState, useContext, useEffect } from 'react';
+import { AppState, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { useRef, useState, useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import getStore from '../../utils/getStore';
+import stateTrue from '../../utils/stateTrue';
+import stateEnd from '../../utils/stateEnd';
 import Timer from './Timer';
+import schedulePushNotification from '../../utils/Notification';
 
-export default function ItemList({ item, boostState }) {
-  const [isActive, setIsActive] = useState(false);
+export default function ItemList({ item, setResetCount }) {
+  const duration = useSelector((state) => state.background.duration);
   const itemName = item.name;
+  const dispatch = useDispatch();
+  const storeData = getStore({ itemName });
+  const [value, setValue] = useState();
+
+  useEffect(() => {
+    let interval = null;
+    if (storeData.isActive === true) {
+      if (duration !== null) {
+        if (value > duration) {
+          setValue(value - duration);
+          if (value > 0) {
+            interval = setTimeout(() => {
+              setValue(value - 1);
+            }, 1000);
+          } else if (value === 0) {
+            stateEnd({ dispatch, itemName });
+          }
+        } else if (value <= duration) {
+          stateEnd({ dispatch, itemName });
+        }
+      } else {
+        if (value > 0) {
+          interval = setTimeout(() => {
+            setValue(value - 1);
+          }, 1000);
+        } else if (value === 0) {
+          stateEnd({ dispatch, itemName });
+        }
+        return () => clearTimeout(interval);
+      }
+    } else {
+      setValue(storeData.value);
+    }
+  }, [storeData.isActive, value, storeData.value]);
 
   const startTimer = () => {
-    setIsActive(true);
-  };
-  const endTimer = () => {
-    setIsActive(false);
+    stateTrue({ dispatch, itemName });
+    schedulePushNotification(storeData);
+    // storeStringData(itemName);
+    // getStringData(itemName);
   };
 
   return (
     <TouchableOpacity stle={styles.startBtn} onPress={() => startTimer()}>
-      <View style={[styles.itemContainer, isActive ? styles.active : styles.notActive]}>
+      <View style={[styles.itemContainer, storeData.isActive ? styles.active : styles.notActive]}>
         <Image style={styles.itemLogo} source={item.image} />
         <View style={styles.textContainer}>
-          <Timer itemName={itemName} isActive={isActive} endTimer={() => endTimer()} key={itemName} boostState={boostState} />
+          <Timer itemName={itemName} value={value} data={storeData} isActive={storeData.isActive} key={itemName} dispatch={dispatch} />
         </View>
-        {isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
+        {storeData.isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
       </View>
     </TouchableOpacity>
   );

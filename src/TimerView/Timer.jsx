@@ -1,17 +1,15 @@
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import { useState, useEffect, useRef } from 'react';
-import onDisplayNotification from '../../Utils/Notification';
-import checkItem from '../../Utils/CheckItem';
-import { getObjectData } from '../../Utils/Storage';
+import { AppState, useState, useEffect, useRef } from 'react';
+import schedulePushNotification from '../../utils/Notification';
+import stateEnd from '../../utils/stateEnd';
+import checkBoost from '../../utils/checkBoost';
+import { startBackgroundTask } from '../../utils/background';
+import registerBackgroundFetchAsync from '../../utils/background';
+import unregisterBackgroundFetchAsync from '../../utils/background';
+import * as BackgroundFetch from 'expo-background-fetch';
+import * as TaskManager from 'expo-task-manager';
 
-export default function Timer({ itemName, isActive, endTimer, boostState }) {
-  const [value, setValue] = useState();
-  const [notif, setNotif] = useState();
-
-  useEffect(() => {
-    checkItem({ itemName, boostState, setValue, setNotif });
-  }, [boostState]);
-
+export default function Timer({ value, isActive }) {
   let sDisplay = parseInt(value % 60);
   const minutesRemaining = parseInt((value - sDisplay) / 60);
   let mDisplay = minutesRemaining % 60;
@@ -28,8 +26,7 @@ export default function Timer({ itemName, isActive, endTimer, boostState }) {
           setValue(value - 1);
         }, 1000);
       } else if (value === 0) {
-        checkItem({ itemName, boostState, setValue, setNotif });
-        onDisplayNotification(notif);
+        onDisplayNotification(notif, initialValue);
         clearInterval(interval);
         endTimer();
       }

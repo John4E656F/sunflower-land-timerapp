@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  name: 'Boiled Egg',
   isActive: false,
   value: 86400,
 };
@@ -9,8 +10,8 @@ export const boiledEggSlice = createSlice({
   name: 'boiledEgg',
   initialState,
   reducers: {
-    startboiledEggCounter: (state, action) => {
-      state.isActive = action.payload;
+    startboiledEggCounter: (state) => {
+      state.isActive = !state.isActive;
     },
   },
 });

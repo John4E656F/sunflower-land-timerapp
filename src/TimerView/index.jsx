@@ -1,13 +1,49 @@
-import { StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { AppState, StyleSheet, Text, View, Button, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { useContext, useState, useEffect, useRef } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import List from './List';
-import { Logo } from '../../Utils/Assets';
-import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../Utils/Context';
+import { Logo } from '../../utils/Assets';
+import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../utils/Context';
+import { DateTime } from 'luxon';
+import { setDuration } from '../../redux/backgroundSlice';
 
-export default function TimerView({ boostState }) {
+export default function TimerView() {
+  const dispatch = useDispatch();
   const DataTools = useContext(DataToolsContext);
   const DataCrops = useContext(DataCropsContext);
   const DataFood = useContext(DataFoodContext);
+  const appState = useRef(AppState.currentState);
+  const [resetCount, setResetCount] = useState(false);
+  const [initialTime, setInitialTime] = useState();
+
+  let backgroundDuration;
+
+  //send bakgroundDuration to redux then use it inside List for calculation
+  useEffect(() => {
+    let initialTime;
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
+      if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
+        console.log('App has come to the foreground!');
+        setResetCount(true);
+        const endTime = DateTime.now();
+        console.log(endTime);
+        const end = DateTime.fromISO(endTime);
+        const start = DateTime.fromISO(initialTime);
+        var duration = end.diff(start).toObject();
+        backgroundDuration = Math.floor((duration.milliseconds / 1000) % 60);
+        dispatch(setDuration(backgroundDuration));
+        console.log(backgroundDuration);
+      } else {
+        initialTime = DateTime.now();
+        console.log(initialTime);
+      }
+      appState.current = nextAppState;
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, [appState]);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -23,21 +59,21 @@ export default function TimerView({ boostState }) {
             <Text style={styles.title}>Timer</Text>
             <Text style={styles.timerCategory}>Tools</Text>
             <View style={styles.listContainer}>
-              {DataTools.map((item, i) =>
-                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
-              )}
+              {DataTools.map((item, i) => (
+                <List item={item} key={item + i} reset={resetCount} />
+              ))}
             </View>
             <Text style={styles.timerCategory}>Crops</Text>
             <View style={styles.listContainer}>
-              {DataCrops.map((item, i) =>
-                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
-              )}
+              {DataCrops.map((item, i) => (
+                <List item={item} key={item + i} reset={resetCount} />
+              ))}
             </View>
             <Text style={styles.timerCategory}>Foods</Text>
             <View style={styles.listContainer}>
-              {DataFood.map((item, i) =>
-                !boostState ? <Text key={item + i}>loading</Text> : <List item={item} key={item + i} boostState={boostState} />,
-              )}
+              {DataFood.map((item, i) => (
+                <List item={item} key={item + i} reset={resetCount} />
+              ))}
             </View>
           </View>
         </View>
