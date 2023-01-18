@@ -1,6 +1,6 @@
 import { AppState, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { useRef, useState, useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getStore from '../../utils/getStore';
 import stateTrue from '../../utils/stateTrue';
 import stateEnd from '../../utils/stateEnd';
@@ -8,6 +8,7 @@ import Timer from './Timer';
 import schedulePushNotification from '../../utils/Notification';
 
 export default function ItemList({ item, setResetCount }) {
+  const duration = useSelector((state) => state.background.duration);
   const itemName = item.name;
   const dispatch = useDispatch();
   const storeData = getStore({ itemName });
@@ -16,14 +17,29 @@ export default function ItemList({ item, setResetCount }) {
   useEffect(() => {
     let interval = null;
     if (storeData.isActive === true) {
-      if (value > 0) {
-        interval = setTimeout(() => {
-          setValue(value - 1);
-        }, 1000);
-      } else if (value === 0) {
-        stateEnd({ dispatch, itemName });
+      if (duration !== null) {
+        if (value > duration) {
+          setValue(value - duration);
+          if (value > 0) {
+            interval = setTimeout(() => {
+              setValue(value - 1);
+            }, 1000);
+          } else if (value === 0) {
+            stateEnd({ dispatch, itemName });
+          }
+        } else if (value <= duration) {
+          stateEnd({ dispatch, itemName });
+        }
+      } else {
+        if (value > 0) {
+          interval = setTimeout(() => {
+            setValue(value - 1);
+          }, 1000);
+        } else if (value === 0) {
+          stateEnd({ dispatch, itemName });
+        }
+        return () => clearTimeout(interval);
       }
-      return () => clearTimeout(interval);
     } else {
       setValue(storeData.value);
     }

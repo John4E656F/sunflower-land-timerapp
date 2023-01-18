@@ -14,5 +14,5 @@ export const backgroundDurationSlice = createSlice({
   },
 });
 
-export const { setPushToken } = backgroundDurationSlice.actions;
+export const { setDuration } = backgroundDurationSlice.actions;
 export default backgroundDurationSlice.reducer;

@@ -5,13 +5,16 @@ import List from './List';
 import { Logo } from '../../utils/Assets';
 import { DataToolsContext, DataCropsContext, DataFoodContext } from '../../utils/Context';
 import { DateTime } from 'luxon';
+import { setDuration } from '../../redux/backgroundSlice';
 
 export default function TimerView() {
+  const dispatch = useDispatch();
   const DataTools = useContext(DataToolsContext);
   const DataCrops = useContext(DataCropsContext);
   const DataFood = useContext(DataFoodContext);
   const appState = useRef(AppState.currentState);
   const [resetCount, setResetCount] = useState(false);
+  const [initialTime, setInitialTime] = useState();
 
   let backgroundDuration;
 
@@ -28,6 +31,7 @@ export default function TimerView() {
         const start = DateTime.fromISO(initialTime);
         var duration = end.diff(start).toObject();
         backgroundDuration = Math.floor((duration.milliseconds / 1000) % 60);
+        dispatch(setDuration(backgroundDuration));
         console.log(backgroundDuration);
       } else {
         initialTime = DateTime.now();
