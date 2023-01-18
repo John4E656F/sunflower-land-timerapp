@@ -1,5 +1,6 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import * as BackgroundFetch from 'expo-background-fetch';
 
 export default async function registerForPushNotificationsAsync() {
   let token;
@@ -31,4 +32,9 @@ export default async function registerForPushNotificationsAsync() {
   }
 
   return token;
+  // BackgroundFetch.registerTaskAsync(itemName, {
+  //   minimumInterval: 60 * 15, // 15 minutes
+  //   stopOnTerminate: false, // android only,
+  //   startOnBoot: true, // android only
+  // })
 }
