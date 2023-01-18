@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "jsEngine": "hermes",
     "splash": {
       "image": "./assets/splash-screen.png",
       "resizeMode": "contain",
@@ -23,7 +24,6 @@
       }
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
@@ -38,7 +38,18 @@
         "projectId": "dc8b3b56-79dc-44db-9162-0e2ee45886f2"
       }
     },
-    "plugins": ["@notifee/react-native"],
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 42,
+            "targetSdkVersion": 42,
+            "buildToolsVersion": "42.0.0"
+          }
+        }
+      ]
+    ],
     "owner": "john4e656f"
   }
 }

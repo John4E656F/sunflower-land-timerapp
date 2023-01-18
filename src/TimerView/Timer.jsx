@@ -1,18 +1,15 @@
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import onDisplayNotification from '../../Utils/Notification';
-import checkItem from '../../Utils/CheckItem';
-import { getObjectData } from '../../Utils/Storage';
+import schedulePushNotification from '../../utils/Notification';
+import stateEnd from '../../utils/stateEnd';
+import checkBoost from '../../utils/checkBoost';
+// import { getObjectData } from '../../Utils/Storage';
 
-export default function Timer({ itemName, isActive, endTimer, boostState }) {
+export default function Timer({ itemName, data, isActive, dispatch }) {
   const [value, setValue] = useState();
-  const [notif, setNotif] = useState();
+  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    checkItem({ itemName, boostState, setValue, setNotif });
-  }, [boostState]);
-
-  let sDisplay = value % 60;
+  let sDisplay = parseInt(value % 60);
   const minutesRemaining = parseInt((value - sDisplay) / 60);
   let mDisplay = minutesRemaining % 60;
   const hoursRemaining = (minutesRemaining - mDisplay) / 60;
@@ -28,13 +25,14 @@ export default function Timer({ itemName, isActive, endTimer, boostState }) {
           setValue(value - 1);
         }, 1000);
       } else if (value === 0) {
-        onDisplayNotification(notif, initialValue);
-        clearInterval(interval);
-        endTimer();
+        schedulePushNotification(itemName, data);
+        stateEnd({ dispatch, itemName });
       }
       return () => clearInterval(interval);
+    } else {
+      setValue(data.value);
     }
-  }, [isActive, value]);
+  }, [isActive, value, data.value]);
 
   return (
     <Text style={[styles.timerText, isActive ? styles.timerActive : styles.timerInActive]}>

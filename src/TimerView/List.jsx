@@ -1,26 +1,27 @@
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { useState, useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import getStore from '../../utils/getStore';
+import stateTrue from '../../utils/stateTrue';
 import Timer from './Timer';
 
-export default function ItemList({ item, boostState }) {
-  const [isActive, setIsActive] = useState(false);
+export default function ItemList({ item }) {
   const itemName = item.name;
+  const dispatch = useDispatch();
+  const storeData = getStore({ itemName });
 
   const startTimer = () => {
-    setIsActive(true);
-  };
-  const endTimer = () => {
-    setIsActive(false);
+    stateTrue({ dispatch, itemName });
   };
 
   return (
     <TouchableOpacity stle={styles.startBtn} onPress={() => startTimer()}>
-      <View style={[styles.itemContainer, isActive ? styles.active : styles.notActive]}>
+      <View style={[styles.itemContainer, storeData.isActive ? styles.active : styles.notActive]}>
         <Image style={styles.itemLogo} source={item.image} />
         <View style={styles.textContainer}>
-          <Timer itemName={itemName} isActive={isActive} endTimer={() => endTimer()} key={itemName} boostState={boostState} />
+          <Timer itemName={itemName} data={storeData} isActive={storeData.isActive} key={itemName} dispatch={dispatch} />
         </View>
-        {isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
+        {storeData.isActive ? null : <Text style={{ color: '#742C2C' }}>Press to Start</Text>}
       </View>
     </TouchableOpacity>
   );
