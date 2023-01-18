@@ -1,5 +1,5 @@
 //NEED TO ADD NFT Boost and Food boost
-export default async function checkItem({ itemName, boostState, setValue, setNotif }) {
+export default function checkItem({ itemName, boostState, setValue, setNotif }) {
   let initialValue;
   let initialNotif;
   if (itemName == 'Axe') {

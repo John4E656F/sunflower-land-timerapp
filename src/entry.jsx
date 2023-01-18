@@ -12,6 +12,13 @@ import registerForPushNotificationsAsync from '../utils/registerNotification';
 import { setPushToken } from '../redux/notificationSlice';
 
 const Tab = createBottomTabNavigator();
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function Entry() {
   const dispatch = useDispatch();
