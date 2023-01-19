@@ -6,6 +6,7 @@ import stateTrue from '../../utils/stateTrue';
 import stateEnd from '../../utils/stateEnd';
 import Timer from './Timer';
 import schedulePushNotification from '../../utils/Notification';
+import counter from '../../utils/counter';
 
 export default function ItemList({ item, setResetCount }) {
   const duration = useSelector((state) => state.background.duration);
@@ -14,32 +15,30 @@ export default function ItemList({ item, setResetCount }) {
   const storeData = getStore({ itemName });
   const [value, setValue] = useState();
 
+  //duration substract value instead of -1 in setTimeout
   useEffect(() => {
-    let interval = null;
     if (storeData.isActive === true) {
-      if ((duration !== null && value !== null) || undefined) {
+      if (duration !== null && value !== null) {
+        console.log(duration);
         if (value > duration) {
-          let newValue = value - duration;
-          if (value > 0) {
-            interval = setTimeout(() => {
-              setValue(newValue - 1);
-            }, 1000);
-          } else if (value === 0) {
-            stateEnd({ dispatch, itemName });
-          }
+          const newValue = value - duration;
+          setValue(newValue);
         } else if (value <= duration) {
           stateEnd({ dispatch, itemName });
         }
-      } else {
-        if (value > 0) {
-          interval = setTimeout(() => {
-            setValue(value - 1);
-          }, 1000);
-        } else if (value === 0) {
-          stateEnd({ dispatch, itemName });
-        }
-        return () => clearTimeout(interval);
       }
+    }
+  }, [duration]);
+
+  useEffect(() => {
+    let interval = null;
+    if (storeData.isActive === true) {
+      if (value > 0) {
+        counter(interval, value, setValue);
+      } else if (value === 0) {
+        stateEnd({ dispatch, itemName });
+      }
+      return () => clearTimeout(interval);
     } else {
       setValue(storeData.value);
     }

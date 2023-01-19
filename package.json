@@ -6,7 +6,8 @@
     "dev": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
   },
   "dependencies": {
     "@expo/prebuild-config": "5.0.7",
@@ -28,6 +29,7 @@
     "expo-status-bar": "~1.4.2",
     "expo-task-manager": "^11.0.1",
     "expo-updates": "~0.15.6",
+    "jest": "^26.6.3",
     "luxon": "^3.2.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
@@ -37,6 +39,12 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.5"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.19.3"
