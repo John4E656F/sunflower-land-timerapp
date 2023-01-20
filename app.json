@@ -2,7 +2,7 @@
   "expo": {
     "name": "SunflowerLand-Timer",
     "slug": "sunflower-land-timer",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -43,9 +43,9 @@
         "expo-build-properties",
         {
           "android": {
-            "compileSdkVersion": 42,
-            "targetSdkVersion": 42,
-            "buildToolsVersion": "42.0.0"
+            "compileSdkVersion": 32,
+            "targetSdkVersion": 32,
+            "buildToolsVersion": "32.0.0"
           }
         }
       ]

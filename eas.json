@@ -28,8 +28,7 @@
     "production": {
       "android": {
         "serviceAccountKeyPath": "./pc-api-5219278024873915682-667-eea38d23aa8e.json",
-        "track": "internal",
-        "releaseStatus": "inProgress"
+        "track": "internal"
       }
     }
   }
