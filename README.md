@@ -33,6 +33,8 @@ To increase the efficiency of my farm. A timer that will notify when you can har
 
 [ReactNative](https://reactnative.dev/)
 
+[Redux Toolkit](https://redux-toolkit.js.org/)
+
 [Expo](https://expo.dev/)
 
 [Expo Notifications](https://docs.expo.dev/versions/latest/sdk/notifications/)
